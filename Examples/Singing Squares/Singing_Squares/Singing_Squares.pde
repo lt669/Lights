@@ -1,5 +1,3 @@
-//import java.util.*; 
-
 Table table;
 int canX = 500;
 int canY = 500;
@@ -25,51 +23,26 @@ void setup() {
     if (row.getInt("Singer") == 1) {
       dur = row.getInt("Duration");
       pit = row.getInt("Pitch");
+      singer1 = new Cir(canX/2, canY/2, dur, pit);
     } else if (row.getInt("Singer") == 2) {
+      dur = row.getInt("Duration");
+      pit = row.getInt("Pitch");
+      singer2 = new Cir(canX/2, canY/2, dur, pit);
     } else if (row.getInt("Singer") == 3) {
+      dur = row.getInt("Duration");
+      pit = row.getInt("Pitch");
+      singer3 = new Cir(canX/2, canY/2, dur, pit);
     } else if (row.getInt("Singer") == 4) {
+      dur = row.getInt("Duration");
+      pit = row.getInt("Pitch");
+      singer4 = new Cir(canX/2, canY/2, dur, pit);
     }
   }
-
-  singer1 = new Cir(canX/2, canY/2, dur, pit);
 }
 
 void draw() {
-  float incX =  random(-15, 15);
-  float incY =  random(-15, 15);
-
-  singer1.drawCir(incX, incY);
+  singer1.drawCir();
+  singer2.drawCir();
+  singer3.drawCir();
+  singer4.drawCir();
 }
-
-class Cir {
-
-  int posX;
-  int posY;
-  int size;
-  int bright;
-  //  float incX;
-  //  float incY;
-
-  //Constructor
-  Cir(int iPosX, int iPosY, int iSize, int iBright) {
-    posX = iPosX;
-    posY = iPosY;
-    size = iSize;
-    bright = iBright;
-  }
-
-  void drawCir(float incX, float incY) {
-    //Random movement variables
-
-
-    //Update position
-    posX += incX;
-    posY += incY;
-
-    //Draw ellipse
-    bright = 255/bright;
-    fill(bright, bright, bright );
-    ellipse(posX, posY, size, size);
-  }
-}
-
