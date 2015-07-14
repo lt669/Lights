@@ -1,4 +1,4 @@
-import java.util.*; 
+//import java.util.*; 
 
 Table table;
 int canX = 500;
@@ -31,11 +31,14 @@ void setup() {
     }
   }
 
-  singer1 = new Cir(0, 0, dur, pit);
+  singer1 = new Cir(canX/2, canY/2, dur, pit);
 }
 
 void draw() {
-  singer1.drawCir();
+  float incX =  random(-15, 15);
+  float incY =  random(-15, 15);
+
+  singer1.drawCir(incX, incY);
 }
 
 class Cir {
@@ -44,8 +47,8 @@ class Cir {
   int posY;
   int size;
   int bright;
-  int incX = new random(-5, 5);
-  int incY = new random(-5, 5);
+  //  float incX;
+  //  float incY;
 
   //Constructor
   Cir(int iPosX, int iPosY, int iSize, int iBright) {
@@ -55,7 +58,7 @@ class Cir {
     bright = iBright;
   }
 
-  void drawCir() {
+  void drawCir(float incX, float incY) {
     //Random movement variables
 
 
@@ -65,7 +68,7 @@ class Cir {
 
     //Draw ellipse
     bright = 255/bright;
-    fill(bright, bright, bright);
+    fill(bright, bright, bright );
     ellipse(posX, posY, size, size);
   }
 }
