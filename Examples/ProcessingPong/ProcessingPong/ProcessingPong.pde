@@ -1,4 +1,6 @@
 
+//NOW WORKING ON A WINDOWS COMPUTER
+
 int canX = 600;
 int canY = 400;
 int check;
