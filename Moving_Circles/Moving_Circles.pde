@@ -1,40 +1,44 @@
+import processing.serial.*;
+Serial port;
+
 int i = 0;
 int j = 0;
 int k = 0;
 int a = 0;
 
-int canX = 510;
-int canY = 510;
+int canX = 700;
+int canY = 700;
 
 int x;
 int y;
 int newX;
 int newY;
-//int moveX;
-//int moveY;
+
+int contact;
 
 
 //Create number of objects bassed on the Circle class
 
 Circle ball1;
 Circle ball2;
+Circle ball3;
 
 void setup() {
+  port = new Serial(this, "/dev/tty.usbmodem411", 9600);
+  port.bufferUntil('\n');
+  
   size(canX, canY);
-  ball1 = new Circle(100, 100, 5,0 , 50, 500);
-  ball2 = new Circle(50, 50, 10, 0, 50, 50);
+  
+  ball1 = new Circle(100, 100, 10,6 , 50, 500);
+  
+  //establishContact();
 }
 
 void draw() {
   background(102);
   ball1.move();
   ball1.display();
-  ball2.move();
-  ball1.collision();
-  ball2.display();
-  ball2.collision();
- // print("X:",ball1.x);
-  
+  ball1.collideDrift(x,y);
 }
 
 class Circle{
@@ -103,6 +107,50 @@ class Circle{
     
   }
   
+//void establishContact() {
+//  while (Serial.available() <= 0) {
+//    Serial.print('A');   // send a capital A
+//    delay(300);
+//  }
+//}
+  
+  void collideDrift(int x, int y){
+    
+    Serial.write(x);
+    delay(10);
+    Serial.write(y);
+    
+  }
+  
+  void collideAbs(){
+    int del = 0;
+// if (x <= 0 || x >= canX || y == 0 || y == canY){
+//  print("FUCK");
+//  port.write("0");
+// } 
+
+  if (y <= 0 ){
+   port.write(0); 
+   delay(del);
+  }
+  else if (y >= canY){
+   port.write(1);
+   delay(del); 
+  }
+  else if (x <= 0){
+   port.write(2);
+   delay(del); 
+  }
+  else if (x >= canX){
+   port.write(3); 
+   delay(del);
+  }
+  else{
+   port.write(4); 
+  }
+
+}
+  
   void collision() {
   
    x1 = x - moveX;
@@ -111,16 +159,10 @@ class Circle{
    y2 = y + moveY;
   
   //Collision range
-  
-  
-// if ((ball1.x == ball2.x) && (ball1.y == ball2.y || ball1.y == ball2.y1 || ball1.y == ball2.y)){
-//  print("FUCK");
-// }
- 
  if (abs(ball1.y - ball2.y) <= ball1.moveY){
   c = 0;
  }
- 
+ // Finish this bit
 } 
   
 }
