@@ -1,4 +1,4 @@
-//Class for drawing a randomly moving size changing circle
+//Class for drawing a randomly moving, size changing circle
 
 class Cir {
   int posX;
@@ -27,36 +27,50 @@ class Cir {
     posX += incX;
     posY += incY;
 
+    if (posX <= 0) {
+      posX += canX;
+    } else if (posX == canX) {
+      posX -= canX;
+    }
+
+    if (posY <= 0) {
+      posY += canY;
+    } else if (posY >= canY) {
+      posY -= canY;
+    }
+
     //Alter circle size
     if (size == maxSize && DONE != true) {
       DONE = true;
-      print("\n DONE");
+      //print("\n DONE");
     } else if (DONE != true) {
       size++;
     } else {
       size = abs(size-1);
     }
 
+    //Check if ready for the next value in the array
     if (size == 0 && DONE == true) {
       NEXT = true;
       DONE = false;
-      print("\n NEXT");
+      //print("\n NEXT");
     } else {
       NEXT = false;
     }
 
-    //Draw ellipse
-    // bright = 255/bright;
-    
-    
-//    fill(255, 0, 0 );
+    // Draw ellipse
+    bright = 255/(bright + 1);
+
+//    stroke(255);
+//    fill(255);
 //    ellipse(posX, posY, size, size);
 //    filter(BLUR, 1);
-    
-    fill(bright, bright, bright );
+
+    stroke(bright, bright, bright);
+    fill(255);
     ellipse(posX, posY, size, size);
     if (size == maxSize && DONE != true) {
-    //  print("\n Size:" + size + "Bright" + bright);
+      //  print("\n Size:" + size + "Bright" + bright);
     }
   }
 

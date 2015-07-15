@@ -1,6 +1,6 @@
 Table table;
-int canX = 1000;
-int canY = 700;
+int canX = 1600;
+int canY = 900;
 int dur = 0;
 int pit = 0;
 
@@ -32,10 +32,8 @@ void setup() {
   s3.count();
   s4.count();
 
-
-
   //Print results
-  s1.printResult();
+  //  s1.printResult();
   //  s2.printResult();
   //  s3.printResult(); 
   //  s4.printResult();
@@ -44,7 +42,6 @@ void setup() {
   singer2 = new Cir(canX*3/4, canY/4, 0, 0);
   singer3 = new Cir(canX/4, canY*3/4, 0, 0);
   singer4 = new Cir(canX*3/4, canY*3/4, 0, 0);
-  noLoop();
 }
 
 void draw() {
