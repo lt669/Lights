@@ -49,6 +49,7 @@ void draw() {
    
    if(singer1.getNext() == true){
     s1.getPitch(); 
+    s1.getDuration();
    }
    
   //  singer2.drawCir();

@@ -30,13 +30,17 @@ class Singer {
     for (int i=0; i < rowNo/4; i++) {
       pit = pitch[i];
       dur = duration[i];
-      print("\n Singer:" + singerNo + " Pitch:" + pit + " Duration:" + dur);
+      // print("\n Singer:" + singerNo + " Pitch:" + pit + " Duration:" + dur);
     }
   }
-  
-  int getPitch(){
+
+  int getPitch() {
     z++;
     return pitch[z];
+  }
+
+  int getDuration() {
+    return duration[z];
   }
 }
 

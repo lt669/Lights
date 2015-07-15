@@ -37,6 +37,7 @@ class Cir {
 
     if (size == 0 && DONE == true) {
       NEXT = true;
+      DONE = false;
     } else {
       NEXT = false;
     }
@@ -45,20 +46,14 @@ class Cir {
     bright = 255/bright;
     fill(bright, bright, bright );
     ellipse(posX, posY, size, size);
+    if(size == maxSize){
     print("\n Size:", size);
+    }
   }
 
   boolean getNext() {
     return NEXT;
   }
 
-  //  void durationCheck(boolean DONE) {
-  //
-  //    if (DONE == true) {
-  //      boolean NEXT = true;
-  //    } else {
-  //      NEXT = false;
-  //    }
-  //  }
 }
 
