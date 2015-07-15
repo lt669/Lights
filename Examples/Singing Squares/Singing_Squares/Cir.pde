@@ -20,8 +20,8 @@ class Cir {
   void drawCir() {
 
     //Random movement variables
-    float incX = random(-15, 15);
-    float incY = random(-15, 15);
+    float incX = random(size, size);
+    float incY = random(size, size);
 
     //Update position
     posX += incX;
