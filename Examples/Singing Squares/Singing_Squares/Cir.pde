@@ -56,7 +56,7 @@ class Cir {
     fill(bright, bright, bright );
     ellipse(posX, posY, size, size);
     if (size == maxSize && DONE != true) {
-      print("\n Size:" + size + "Bright" + bright);
+    //  print("\n Size:" + size + "Bright" + bright);
     }
   }
 

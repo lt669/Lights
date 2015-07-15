@@ -57,7 +57,7 @@ class Singer {
       retPitch = pitch[z];
       z++;
     }
-    print("\n PITCH: ", retPitch);
+    print("\n Singer" + singerNo + " PITCH: ", retPitch);
     return retPitch;
   }
 

@@ -1,6 +1,6 @@
 Table table;
-int canX = 500;
-int canY = 500;
+int canX = 1000;
+int canY = 700;
 int dur = 0;
 int pit = 0;
 
@@ -40,8 +40,10 @@ void setup() {
   //  s3.printResult(); 
   //  s4.printResult();
 
-  singer1 = new Cir(canX/2, canY/2, 0, 0);
-  singer2 = new Cir(canX/2, canY/2, 0, 0);
+  singer1 = new Cir(canX/4, canY/4, 0, 0);
+  singer2 = new Cir(canX*3/4, canY/4, 0, 0);
+  singer3 = new Cir(canX/4, canY*3/4, 0, 0);
+  singer4 = new Cir(canX*3/4, canY*3/4, 0, 0);
   noLoop();
 }
 
@@ -59,18 +61,25 @@ void draw() {
     singer1.setSize(s1.getDuration());
   }
   singer1.drawCir();
-  
-  //  singer2.drawCir();
-  //  
-  //  if (singer2.getNext() == true) {
-  //    singer2.setSize(s2.getDuration());
-  //    singer2.setBright(s2.getPitch());
-  //    print("\n Pitch: " + s2.getPitch() + " Duration: " + s2.getDuration());
-  //  }
 
+  if (singer2.getNext() == true) {
+    singer2.setBright(s2.getPitch());
+    singer2.setSize(s2.getDuration());
+  }
+  singer2.drawCir();
 
-  //  singer3.drawCir();
-  //  singer4.drawCir();
+  if (singer3.getNext() == true) {
+    singer3.setBright(s3.getPitch());
+    singer3.setSize(s3.getDuration());
+  }
+  singer3.drawCir();
+
+  if (singer4.getNext() == true) {
+    singer4.setBright(s4.getPitch());
+    singer4.setSize(s4.getDuration());
+  }
+  singer4.drawCir();
+
   //}
 }
 
