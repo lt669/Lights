@@ -10,40 +10,51 @@ Cir singer3;
 Cir singer4;
 
 Singer s1;
+Singer s2;
+Singer s3;
+Singer s4;
 
 void setup() {
+
+  //Setup screen
   background(-1);
   size(canX, canY);
 
+  //Load CSV file
+
+
+  //Initialise new objects
   s1 = new Singer(1);
+  s2 = new Singer(2);
+  s3 = new Singer(3);
+  s4 = new Singer(4);
+
+  //Count number of elements for each singer
   s1.count();
+  s2.count();
+  s3.count();
+  s4.count();
+
+  //Print results
   s1.printResult();
-//  table = loadTable("CSV.csv", "header");
-//
-//  for (TableRow row : table.rows ()) {
-//    if (row.getInt("Singer") == 1) {
-//      dur = row.getInt("Duration");
-//      pit = row.getInt("Pitch");
-//      singer1 = new Cir(canX/2, canY/2, dur, pit);
-//    } else if (row.getInt("Singer") == 2) {
-//      dur = row.getInt("Duration");
-//      pit = row.getInt("Pitch");
-//      singer2 = new Cir(canX/2, canY/2, dur, pit);
-//    } else if (row.getInt("Singer") == 3) {
-//      dur = row.getInt("Duration");
-//      pit = row.getInt("Pitch");
-//      singer3 = new Cir(canX/2, canY/2, dur, pit);
-//    } else if (row.getInt("Singer") == 4) {
-//      dur = row.getInt("Duration");
-//      pit = row.getInt("Pitch");
-//      singer4 = new Cir(canX/2, canY/2, dur, pit);
-//    }
-//  }
+  s2.printResult();
+  s3.printResult(); 
+  s4.printResult();
+
+  singer1 = new Cir(canX/2, canY/2, dur, pit);
 }
 
 void draw() {
-  singer1.drawCir();
-  singer2.drawCir();
-  singer3.drawCir();
-  singer4.drawCir();
+   singer1.drawCir();
+   
+   if(singer1.getNext() == true){
+    s1.getPitch(); 
+   }
+   
+  //  singer2.drawCir();
+  //  singer3.drawCir();
+  //  singer4.drawCir();
 }
+
+
+

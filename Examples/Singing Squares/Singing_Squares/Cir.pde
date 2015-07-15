@@ -7,6 +7,7 @@ class Cir {
   int size = 0;
   int bright;
   boolean DONE;
+  boolean NEXT;
 
   //Constructor
   Cir(int iPosX, int iPosY, int iSize, int iBright) {
@@ -18,8 +19,8 @@ class Cir {
 
   void drawCir() {
     //Random movement variables
-    float incX =  random(-15, 15);
-    float incY =  random(-15, 15);
+    float incX = random(-15, 15);
+    float incY = random(-15, 15);
 
     //Update position
     posX += incX;
@@ -34,9 +35,11 @@ class Cir {
       size = abs(size-1);
     }
 
-    //    if(DONE == true){
-    //     
-    //    }
+    if (size == 0 && DONE == true) {
+      NEXT = true;
+    } else {
+      NEXT = false;
+    }
 
     //Draw ellipse
     bright = 255/bright;
@@ -44,5 +47,18 @@ class Cir {
     ellipse(posX, posY, size, size);
     print("\n Size:", size);
   }
+
+  boolean getNext() {
+    return NEXT;
+  }
+
+  //  void durationCheck(boolean DONE) {
+  //
+  //    if (DONE == true) {
+  //      boolean NEXT = true;
+  //    } else {
+  //      NEXT = false;
+  //    }
+  //  }
 }
 

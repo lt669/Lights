@@ -1,13 +1,15 @@
 class Singer {
 
+  //Initialise Arrays to store elements for each singer
   int[] pitch = new int[0];
   int[] duration = new int[0];
-
-  //Use ArrayList to continuously add elements
-  //  ArrayList<Pitch> pitch = new ArrayList<Pitch>();
-  //  ArrayList<Duration> duration = new ArrayList<Duration>(); 
   int singerNo;
+  int z = -1;
 
+  //Load CSV file
+  Table table = loadTable("CSV.csv", "header");
+  TableRow row;
+  int rowNo = table.getRowCount();
 
   //Constructor
   Singer(int iSingerNo) {
@@ -16,27 +18,25 @@ class Singer {
 
   //Count the number of elements in the CSV file for each singer
   void count() {
-    table = loadTable("CSV.csv", "header");
     for (TableRow row : table.rows ()) {
       if (row.getInt("Singer") == singerNo) {
         pitch = append(pitch, row.getInt("Pitch"));
         duration = append(duration, row.getInt("Duration"));
-
-        //        pitch.add(new Pitch(row.getInt("Pitch")));
-        //        duration.add(new Duration(row.getInt("Duration")));
       }
     }
   }
 
   void printResult() {
-    for (int i=0; i < table.rows() ; i++) {
-      //      Pitch pit = pitch.get(i);
-      //      Duration dur = duration.get(i);
-
+    for (int i=0; i < rowNo/4; i++) {
       pit = pitch[i];
       dur = duration[i];
-      print("\n Singer: " + singerNo + "Pitch: " + pit + "Duration: " + dur);
+      print("\n Singer:" + singerNo + " Pitch:" + pit + " Duration:" + dur);
     }
+  }
+  
+  int getPitch(){
+    z++;
+    return pitch[z];
   }
 }
 
