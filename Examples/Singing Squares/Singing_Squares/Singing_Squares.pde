@@ -17,7 +17,7 @@ Singer s4;
 void setup() {
 
   //Setup screen
-  background(-1);
+  //background(-1);
   size(canX, canY);
 
   //Initialise new objects
@@ -51,6 +51,8 @@ void draw() {
   //  }
   //  else{
 
+  fill(255, 255, 255, 3);
+  rect(0, 0, width, height);
 
 
   if (singer1.getNext() == true) {

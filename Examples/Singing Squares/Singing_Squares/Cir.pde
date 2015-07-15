@@ -58,8 +58,12 @@ class Cir {
       NEXT = false;
     }
 
+    //Draw Line
+//    stroke(250,250,250);
+//    line(canX/2,canY/2,posX,posY);
+
     // Draw ellipse
-    bright = 255/(bright + 1);
+    bright = 255 * 12/(bright+1);
 
 //    stroke(255);
 //    fill(255);
@@ -67,7 +71,7 @@ class Cir {
 //    filter(BLUR, 1);
 
     stroke(bright, bright, bright);
-    fill(255);
+    fill(0, 0, 0, bright);
     ellipse(posX, posY, size, size);
     if (size == maxSize && DONE != true) {
       //  print("\n Size:" + size + "Bright" + bright);
