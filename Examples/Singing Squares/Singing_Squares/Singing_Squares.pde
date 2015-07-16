@@ -1,8 +1,9 @@
 Table table;
-int canX = 1600;
-int canY = 900;
+int canX = 900;
+int canY = 600;
 int dur = 0;
 int pit = 0;
+PImage img;
 
 Cir singer1;
 Cir singer2;
@@ -15,6 +16,8 @@ Singer s3;
 Singer s4;
 
 void setup() {
+  
+  //frameRate(30);
 
   //Setup screen
   background(-1);
@@ -52,7 +55,7 @@ void draw() {
   //  else{
 
   noStroke();
-  fill(255, 5);
+  fill(255, 20);
   rect(random(canX), random(canY), canX/4, canY/4);
 
 
@@ -80,12 +83,20 @@ void draw() {
   }
   singer4.drawCir();
 
+  float imgX = random(-5, 5);
+  float imgY = random(-5, 5);
+
+//  saveFrame("#.png");
+//  background(-1);
+//  img = loadImage("#.png");
+//  image(img, 1, 1);
+
   //}
 }
 
-void keyPressed() {
-  if (key == 'w') {
-    redraw();
-  }
-}
+//void keyPressed() {
+//  if (key == 'w') {
+//    singer1.drawCir
+//  }
+//}
 
