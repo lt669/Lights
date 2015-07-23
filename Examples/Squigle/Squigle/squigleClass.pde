@@ -1,0 +1,11 @@
+//class Squigle{
+//  
+//  
+//  //Constructor
+//  Squigle()  
+//  
+//  
+//  
+//  
+//  
+//}
