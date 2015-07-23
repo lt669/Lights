@@ -52,6 +52,8 @@ class Singer {
   //   } 
   //  }
 
+
+  //Returns the current value under 'Pitch' in the CSV file
   int getPitch() {
     if (z < rowNo/4) {
       retPitch = pitch[z];
@@ -61,6 +63,7 @@ class Singer {
     return retPitch;
   }
 
+  //Returns the current value under 'Duration' in the CSV file
   int getDuration() {
     if (x < rowNo/4) {
       retDuration = duration[x];
