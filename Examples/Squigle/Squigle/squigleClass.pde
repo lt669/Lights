@@ -49,6 +49,7 @@ class squigleClass {
     if (morePoints == 1) {
       //      print("\nMore Points:", points);
       largerArray();
+     
     } else if (morePoints == 2) {
       smallerArray();
       //      print("\nLess Points:", points);
@@ -63,6 +64,16 @@ class squigleClass {
         //        print("\nStandard LARGE");
       }
     }
+    
+    for(int i = 0; i<xArray.length;i++){
+       print("\nxArray["+i+"]:",xArray[i]); 
+      }
+      
+      for(int i = 0; i<newXArray.length;i++){
+       print("\nnewXArray["+i+"]:",newXArray[i]); 
+      }
+      print("\nLargedUsed:",largerUsed);
+    
     count++;
   }
 
@@ -124,8 +135,8 @@ class squigleClass {
       arrayCopy(xArray, 0, newXArray, 0, points);
       arrayCopy(yArray, 0, newYArray, 0, points);
 
-      print("\nxArray[0]", xArray[0]);
-      print("\nnewXArray[0]", newXArray[0]);
+//      print("\nxArray[0]", xArray[0]);
+//      print("\nnewXArray[0]", newXArray[0]);
     } else {
       //Create two buffer arrays used to temporarly store data
       float[] bufferXArray = new float[points+1];
@@ -136,9 +147,9 @@ class squigleClass {
         bufferYArray[i] = newYArray[i];
       }
 
-      print("\nxArray[0]", xArray[0]);
-      print("\nnewXArray[0]", newXArray[0]);
-      print("\nbufferXArray[0]", bufferXArray[0]);
+//      print("\nxArray[0]", xArray[0]);
+//      print("\nnewXArray[0]", newXArray[0]);
+//      print("\nbufferXArray[0]", bufferXArray[0]);
       //Format 'newArray' with less elements
       newXArray = new float[points+1];
       newYArray = new float[points+1];
@@ -153,7 +164,7 @@ class squigleClass {
     //Calculate 'Head' position
     newXArray[0] = xDirection;
     newYArray[0] = yDirection;
-    print("\nnewXArray[0]:", newXArray[0]);
+//    print("\nnewXArray[0]:", newXArray[0]);
 
     //Save the previous positions of the 'head' along the array
     for (int i = 0; i< points; i++) {

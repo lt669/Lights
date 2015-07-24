@@ -19,12 +19,12 @@ squigleClass sq3;
 squigleClass sq4;
 
 void setup() {
-  //noLoop();
+  noLoop();
   size(canX, canY);
   background(-1);
 
   sq1 = new squigleClass(newX, newY, nPoints);
-  sq2 = new squigleClass(canX*3/4, canY*3/4, 50);
+  sq2 = new squigleClass(canX*3/4, canY*3/4, 5);
   sq3 = new squigleClass(canX*3/4, canY/4, 10);
   sq4 = new squigleClass(canX/4, canY*3/4, 30);
 }
@@ -45,9 +45,9 @@ void draw() {
   sq2.calcShape(nPoints);
   sq2.drawShape();
   sq2.edgeCheck();
-    sq3.calcShape(nPoints);
-    sq3.drawShape();
-    sq3.edgeCheck();
+//    sq3.calcShape(nPoints);
+//    sq3.drawShape();
+//    sq3.edgeCheck();
   //  sq4.calcShape();
   //  sq4.drawShape();
   //  sq4.edgeCheck();
@@ -55,7 +55,7 @@ void draw() {
 
 void mousePressed() {
   check = 1;
- // redraw();
+  redraw();
  // nPoints = -1;
 }
 
@@ -66,7 +66,7 @@ void mouseReleased() {
 
 void keyPressed() {
  pressed = true;
- // redraw();
+  redraw();
 }
 
 void keyReleased(){
