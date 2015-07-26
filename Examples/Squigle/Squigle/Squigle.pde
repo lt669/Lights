@@ -1,15 +1,10 @@
 
 int canX = 600;
 int canY = 400;
-//int x = canX/2;
-//int y = canY/2;
-int check;
-
+int check = 0;
 int nPoints = 10;
-
 float newX = canX/2;
 float newY = canY/2;
-
 int input;
 boolean pressed;
 
@@ -36,11 +31,11 @@ void draw() {
 
 
 
-  //  sq1.calcShape(nPoints);
-  //  sq1.edgeCheck();
-  //  sq1.drawShape();
-  //  newX = sq1.getPosX();
-  //  newY = sq1.getPosY();
+//    sq1.calcShape(nPoints);
+//    sq1.edgeCheck();
+//    sq1.drawShape();
+//    newX = sq1.getPosX();
+//    newY = sq1.getPosY();
 
   sq2.calcShape(nPoints);
   sq2.drawShape();
@@ -77,10 +72,13 @@ void pointsCalc(){
  
   if(pressed == true){
     nPoints = Character.digit(key,10);
-    print("\nnPoints:",nPoints);
+   // println("\nnPoints:",nPoints);
   }
   else if(pressed == false){
     nPoints = 0;
+  }
+  else{
+   nPoints = nPoints; 
   }
 }
 
