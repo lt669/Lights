@@ -11,6 +11,9 @@ class squigleClass {
   float[] newYArray;
   float xDirection;
   float yDirection;
+  float randMove;
+  int curve = 10;
+  int divide = 8;
 
   //Variables to signify which array was last edited
   boolean largerUsed;
@@ -30,17 +33,58 @@ class squigleClass {
 
     xDirection = posX; 
     yDirection = posY;
+    
+    
   }  
 
   void calcShape(int morePoints) {
 
     //Calculate the direction the 'head' will be moving in
     if (check == 0) {
-      xDirection += cos(TWO_PI*count/10)*10; 
-      yDirection += sin(TWO_PI*count/10)*10;
+      //Each object is given a random direction
+      randMove = round(random(0,3));
+      
+      //Random number to slightly move the hovering circle
+      float p = random(19,20);
+      xDirection += cos(TWO_PI*count/10)*p; 
+      yDirection += sin(TWO_PI*count/10)*p;
     } else if (check == 1) {
-      xDirection += random(-5, 5); 
-      yDirection += random(-5, 5);
+      
+      move = randMove;
+      
+      if(move ==0){
+      float p = random(-5,5);
+//      xDirection += sin(TWO_PI*count/10)*count + p;
+//      yDirection += 2;
+      xDirection += cos((TWO_PI/divide)*count/10)*curve; 
+      yDirection += sin((TWO_PI/divide)*count/10)*curve;
+      } else if (move ==1){
+      float p = random(-5,5);
+//      xDirection += sin(TWO_PI*count/10)*count + p;
+//      yDirection -= 2;
+      
+      xDirection -= cos((TWO_PI/divide)*count/10)*curve; 
+      yDirection += sin((TWO_PI/divide)*count/10)*curve;
+      
+      } else if (move ==2){
+      float p = random(-5,5);
+//      xDirection += 2;
+//      yDirection += sin(TWO_PI*count/10)*count + p;
+      
+      xDirection += cos((TWO_PI/divide)*count/10)*curve; 
+      yDirection -= sin((TWO_PI/divide)*count/10)*curve;
+      
+      } else if (move ==3){
+      float p = random(-5,5);
+//      xDirection -= 2;
+//      yDirection += sin(TWO_PI*count/10)*count + p;
+      
+      xDirection -= cos((TWO_PI/divide)*count/10)*curve; 
+      yDirection -= sin((TWO_PI/divide)*count/10)*curve;
+    
+      }
+      
+
     }
 
     if (morePoints == 1) {
@@ -215,5 +259,6 @@ class squigleClass {
       yDirection = canY;
     }
   }
+ 
 }
 

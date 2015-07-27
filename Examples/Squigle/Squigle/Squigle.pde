@@ -1,12 +1,13 @@
 
-int canX = 600;
-int canY = 400;
-int check = 0;
+int canX = 1200;
+int canY = 800;
+float check = 0;
 int nPoints = 10;
 float newX = canX/2;
 float newY = canY/2;
 int input;
 boolean pressed;
+float move;
 
 squigleClass sq1;
 squigleClass sq2;
@@ -29,12 +30,9 @@ void draw() {
   pointsCalc();
   background(-1);
 
-
-
   sq1.calcShape(nPoints);
   sq1.edgeCheck();
   sq1.drawShape();
-
 
   sq2.calcShape(nPoints);
   sq2.drawShape();
@@ -51,6 +49,7 @@ void draw() {
 
 void mousePressed() {
   check = 1;
+  //move = round(random(0,30));
 }
 
 void mouseReleased() {
