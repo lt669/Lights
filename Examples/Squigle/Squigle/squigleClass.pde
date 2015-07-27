@@ -12,8 +12,8 @@ class squigleClass {
   float xDirection;
   float yDirection;
   float randMove;
-  int curve = 10;
-  int divide = 8;
+  int curve = 20;
+  int divide = 16;
 
   //Variables to signify which array was last edited
   boolean largerUsed;
@@ -33,23 +33,29 @@ class squigleClass {
 
     xDirection = posX; 
     yDirection = posY;
-    
-    
-  }  
+  }
 
   void calcShape(int morePoints) {
-
-    //Calculate the direction the 'head' will be moving in
-    if (check == 0) {
+    
+    if(count == 1){
       //Each object is given a random direction
       randMove = round(random(0,3));
+      divide = round(random(2,16));
+      curve = round(random(2,20));
+    }
+    
+    //Calculate the direction the 'head' will be moving in
+    if (check == 0) {
+      
+      
       
       //Random number to slightly move the hovering circle
-      float p = random(19,20);
+      float p = random(18,20);
       xDirection += cos(TWO_PI*count/10)*p; 
       yDirection += sin(TWO_PI*count/10)*p;
     } else if (check == 1) {
-      
+
+      //Assign random variable
       move = randMove;
       
       if(move ==0){
@@ -61,32 +67,24 @@ class squigleClass {
       } else if (move ==1){
       float p = random(-5,5);
 //      xDirection += sin(TWO_PI*count/10)*count + p;
-//      yDirection -= 2;
-      
+//      yDirection -= 2;  
       xDirection -= cos((TWO_PI/divide)*count/10)*curve; 
       yDirection += sin((TWO_PI/divide)*count/10)*curve;
-      
       } else if (move ==2){
       float p = random(-5,5);
 //      xDirection += 2;
 //      yDirection += sin(TWO_PI*count/10)*count + p;
-      
       xDirection += cos((TWO_PI/divide)*count/10)*curve; 
       yDirection -= sin((TWO_PI/divide)*count/10)*curve;
-      
       } else if (move ==3){
       float p = random(-5,5);
 //      xDirection -= 2;
 //      yDirection += sin(TWO_PI*count/10)*count + p;
-      
       xDirection -= cos((TWO_PI/divide)*count/10)*curve; 
       yDirection -= sin((TWO_PI/divide)*count/10)*curve;
-    
       }
-      
-
     }
-
+    //Depending on input calculate next squigle positions
     if (morePoints == 1) {
       largerArray();
     } else if (morePoints == 2) {
@@ -100,7 +98,7 @@ class squigleClass {
         standardLargeArray();
       }
     }
-
+    //Restart counter after 10
     if (count == 10) {
       count = 1;
     } else {
@@ -110,7 +108,8 @@ class squigleClass {
 
   //Function that increases the size of the array and stores values
   void largerArray() {
-    //Increase number of points
+    
+    //Increase number of points in array
     points += 1; 
 
     //If the last array used was the smaller one, copy data to new array
@@ -131,15 +130,19 @@ class squigleClass {
       xArray[points-i] = xArray[points-(i+1)]; 
       yArray[points-i] = yArray[points-(i+1)];
     }
-    //Calculate 'Head' position
+    //Calculate new 'Head' position
     xArray[0] = xDirection; 
     yArray[0] = yDirection; 
+    
+    //State which array was last used
     largerUsed = true; 
     smallerUsed = false;
   }
 
   //Function that shrinks the array and stores new values
   void smallerArray() {
+    
+    //Decrease number of points & ensure it doesnt go below 0
     points -= 1; 
     if (points <= 1) {
       points = 1;
@@ -152,7 +155,6 @@ class squigleClass {
       newYArray = new float[points +1]; 
 
       //Fill with almost all data from old array
-
       arrayCopy(xArray, 0, newXArray, 0, points); 
       arrayCopy(yArray, 0, newYArray, 0, points);
     } else {  
@@ -164,7 +166,6 @@ class squigleClass {
         bufferXArray[i] = newXArray[i]; 
         bufferYArray[i] = newYArray[i];
       }
-
       //Format 'newArray' with less elements
       newXArray = new float[points +1]; 
       newYArray = new float[points +1]; 
@@ -179,24 +180,22 @@ class squigleClass {
       newXArray[points-i] = newXArray[points-(i+1)]; 
       newYArray[points-i] = newYArray[points-(i+1)];
     }
-    for (int i = 0; i< points; i++) {
-    }
+
     //Calculate 'Head' position
     newXArray[0] = xDirection; 
     newYArray[0] = yDirection;
 
+    //State which array was last used
     smallerUsed = true; 
     largerUsed = false;
   }
 
   //Function that updates the array ones it has grown
   void standardLargeArray() {
-
     for (int i = 0; i<points; i++) {
       xArray[points-i] = xArray[points-(i+1)]; 
       yArray[points-i] = yArray[points-(i+1)];
     }
-
     //Calculate 'Head' position
     xArray[0] = xDirection; 
     yArray[0] = yDirection;
@@ -209,15 +208,20 @@ class squigleClass {
       newXArray[points-i] = newXArray[points-(i+1)]; 
       newYArray[points-i] = newYArray[points-(i+1)];
     }
-
     //Calculate 'Head' position
     newXArray[0] = xDirection; 
     newYArray[0] = yDirection;
   }
 
-
+//THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
-    stroke(0); 
+    
+    map(xDirection, 0, canX, 0 ,360);
+    map(yDirection, 0, canX, 0 ,360);
+    colorMode(HSB,360);
+    stroke(xDirection,yDirection,100); 
+    strokeWeight(2);
+    fill(xDirection,yDirection,100);
     beginShape(); 
     if (largerUsed == true) {
       for (int i=0; i<xArray.length; i++) {
@@ -229,14 +233,58 @@ class squigleClass {
       }
     } else {
       for (int i=0; i<xArray.length; i++) {
-        curveVertex(xArray[0], yArray[0]); 
         curveVertex(xArray[i], yArray[i]);
       }
     }
-
     endShape();
   }
+  
+//    void drawShape() {
+//    
+//    map(xDirection, 0, canX, 0 ,360);
+//    map(yDirection, 0, canX, 0 ,360);
+//    colorMode(HSB,360);
+//    stroke(xDirection,yDirection,100); 
+//    strokeWeight(2);
+//    beginShape(TRIANGLES); 
+//    if (largerUsed == true) {
+//      for (int i=0; i<xArray.length; i++) {
+//        vertex(xArray[i], yArray[i]);
+//      }
+//    } else if (smallerUsed == true) {
+//      for (int x=0; x<newXArray.length; x++) {
+//        vertex(newXArray[x], newYArray[x]);
+//      }
+//    } else {
+//      for (int i=0; i<xArray.length; i++) {
+//        vertex(xArray[i], yArray[i]);
+//      }
+//    }
+//    endShape();
+//  }
 
+
+// void drawShape() {
+//    stroke(0); 
+//    beginShape(POLYGON); 
+//    if (largerUsed == true) {
+//      for (int i=1; i<xArray.length; i++) {
+//        vertex(xArray[0], yArray[0]);
+//        quadraticVertex(xArray[0], yArray[0],xArray[i], yArray[i]);
+//      }
+//    } else if (smallerUsed == true) {
+//      for (int x=1; x<newXArray.length; x++) {
+//        vertex(xArray[0], yArray[0]); 
+//        quadraticVertex(xArray[0], yArray[0],newXArray[x], newYArray[x]);
+//      }
+//    } else {
+//      for (int i=1; i<xArray.length; i++) {
+//       vertex(xArray[0], yArray[0]); 
+//       quadraticVertex(xArray[0], yArray[0],xArray[i], yArray[i]);
+//      }
+//    }
+//    endShape();
+//  }
 
   /*These are currently not being used */
   float getPosX() {

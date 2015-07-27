@@ -2,7 +2,7 @@
 int canX = 1200;
 int canY = 800;
 float check = 0;
-int nPoints = 10;
+int nPoints = 1;
 float newX = canX/2;
 float newY = canY/2;
 int input;
@@ -17,9 +17,9 @@ squigleClass sq4;
 void setup() {
   // noLoop();
   size(canX, canY);
-  background(-1);
+  background(0);
 
-  sq1 = new squigleClass(newX, newY, nPoints);
+  sq1 = new squigleClass(newX, newY, 10);
   sq2 = new squigleClass(canX*3/4, canY*3/4, 5);
   sq3 = new squigleClass(canX*3/4, canY/4, 10);
   sq4 = new squigleClass(canX/4, canY*3/4, 30);
@@ -28,7 +28,7 @@ void setup() {
 
 void draw() {
   pointsCalc();
-  background(-1);
+  background(0);
 
   sq1.calcShape(nPoints);
   sq1.edgeCheck();
