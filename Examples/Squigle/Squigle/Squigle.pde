@@ -14,7 +14,7 @@ squigleClass sq3;
 squigleClass sq4;
 
 void setup() {
-  noLoop();
+  // noLoop();
   size(canX, canY);
   background(-1);
 
@@ -31,54 +31,49 @@ void draw() {
 
 
 
-//    sq1.calcShape(nPoints);
-//    sq1.edgeCheck();
-//    sq1.drawShape();
-//    newX = sq1.getPosX();
-//    newY = sq1.getPosY();
+  sq1.calcShape(nPoints);
+  sq1.edgeCheck();
+  sq1.drawShape();
+
 
   sq2.calcShape(nPoints);
   sq2.drawShape();
   sq2.edgeCheck();
-//    sq3.calcShape(nPoints);
-//    sq3.drawShape();
-//    sq3.edgeCheck();
-  //  sq4.calcShape();
-  //  sq4.drawShape();
-  //  sq4.edgeCheck();
+  
+  sq3.calcShape(nPoints);
+  sq3.drawShape();
+  sq3.edgeCheck();
+  
+  sq4.calcShape(nPoints);
+  sq4.drawShape();
+  sq4.edgeCheck();
 }
 
 void mousePressed() {
   check = 1;
-  redraw();
- // nPoints = -1;
 }
 
 void mouseReleased() {
   check = 0;
-  //nPoints = 0;
 }
 
 void keyPressed() {
- pressed = true;
-  redraw();
+  pressed = true;
 }
 
-void keyReleased(){
- pressed = false; 
+void keyReleased() {
+  pressed = false;
 }
 
-void pointsCalc(){
- 
-  if(pressed == true){
-    nPoints = Character.digit(key,10);
-   // println("\nnPoints:",nPoints);
-  }
-  else if(pressed == false){
+void pointsCalc() {
+
+  if (pressed == true) {
+    nPoints = Character.digit(key, 10);
+    // println("\nnPoints:",nPoints);
+  } else if (pressed == false) {
     nPoints = 0;
-  }
-  else{
-   nPoints = nPoints; 
+  } else {
+    nPoints = nPoints;
   }
 }
 
@@ -92,5 +87,4 @@ void pointsCalc(){
 //  }
 
 //  print("\n Points:", nPoints);
-
 

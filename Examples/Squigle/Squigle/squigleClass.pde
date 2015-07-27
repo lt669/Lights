@@ -28,65 +28,34 @@ class squigleClass {
     newXArray = new float[points +1];
     newYArray = new float[points +1];
 
-    for (int i=0; i<points; i++) {
-      xArray[i] = 0; 
-      yArray[i] = 0; 
-      newXArray[i] = 0; 
-      newYArray[i] = 0;
-    }
-
     xDirection = posX; 
     yDirection = posY;
-    
   }  
-
 
   void calcShape(int morePoints) {
 
-    
-   
-    
     //Calculate the direction the 'head' will be moving in
     if (check == 0) {
       xDirection += cos(TWO_PI*count/10)*10; 
       yDirection += sin(TWO_PI*count/10)*10;
     } else if (check == 1) {
-      xDirection += cos(TWO_PI*count/10)*10; 
-      yDirection += sin(TWO_PI*count/10)*10;
-      //      
-      //      xDirection += random(-5, 5); 
-      //      yDirection += random(-5, 5);
+      xDirection += random(-5, 5); 
+      yDirection += random(-5, 5);
     }
 
     if (morePoints == 1) {
-      //      print("\nMore Points:", points);
       largerArray();
     } else if (morePoints == 2) {
-      smallerArray(); 
-      //      print("\nLess Points:", points);
+      smallerArray();
     } else {
       if (largerUsed == true) {
         standardLargeArray();
       } else if (smallerUsed == true) {
-        standardSmallArray(); 
-        //        print("\nStandard SMALL");
+        standardSmallArray();
       } else {
-        standardLargeArray(); 
-        //        print("\nStandard LARGE");
+        standardLargeArray();
       }
     }
-     
-
-//    println("\nPoints:", points); 
-//
-//    for (int i = 0; i<xArray.length; i++) {
-//      print("\nxArray["+i+"]:", xArray[i] + " - yArray["+i+"]:", yArray[i]);
-//    }
-//
-//    for (int i = 0; i<newXArray.length; i++) {
-//      print("\nnewXArray["+i+"]:", newXArray[i] + " - newYArray["+i+"]:", newYArray[i]);
-//    }
-//    print("\nLargedUsed:", largerUsed); 
 
     if (count == 10) {
       count = 1;
@@ -123,12 +92,6 @@ class squigleClass {
     yArray[0] = yDirection; 
     largerUsed = true; 
     smallerUsed = false;
-    
-          println("\nIN LARGE");
-for(int x=0;x<points;x++){
-         print("\nxArray["+ x + "]: " + xArray[x]);
-       }
-    
   }
 
   //Function that shrinks the array and stores new values
@@ -137,7 +100,7 @@ for(int x=0;x<points;x++){
     if (points <= 1) {
       points = 1;
     }
-    println("\nPOINTS:", points); 
+
     //If last array used was the larger one copy old data to new array
     if (largerUsed == true) {
       //Create new arrays with new 'points value'
@@ -148,16 +111,6 @@ for(int x=0;x<points;x++){
 
       arrayCopy(xArray, 0, newXArray, 0, points); 
       arrayCopy(yArray, 0, newYArray, 0, points);
-      
-      println("AFTER LARGE");
-for(int x=0;x<points;x++){
-         print("\nxArray["+ x + "]: " + xArray[x]);
-       }
-       
-       for(int x=0;x<points;x++){
-         print("\nnewXArray[" + x +"]: " + newXArray[x]);
-       }
-       
     } else {  
       //Create two buffer arrays used to temporarly store data
       float[] bufferXArray = new float[points+1]; 
@@ -168,45 +121,25 @@ for(int x=0;x<points;x++){
         bufferYArray[i] = newYArray[i];
       }
 
-            println("AFTER SMALL");
-for(int t=0;t<points;t++){
-  print("\nxArray["+ t + "]: " + xArray[t]);
-}
-
-for(int t=0;t<points;t++){
-            print("\nnewXArray[" + t +"]: " + newXArray[t]);
-}
-
-for(int t=0;t<points;t++){
-            print("\nbufferXArray[" + t + "]: " + bufferXArray[t]);
-}
       //Format 'newArray' with less elements
       newXArray = new float[points +1]; 
       newYArray = new float[points +1]; 
 
       //Copy old data into the formatted array but with 1 less element
-      //      print("\nbufferArray Length:", bufferXArray.length);
-      //      print("\nnewXArray Length:", newXArray.length);
       arrayCopy(bufferXArray, 0, newXArray, 0, points); 
       arrayCopy(bufferYArray, 0, newYArray, 0, points);
     }
 
-
-   //THIS IS WHERE STUFF IS GETTING FUCKED UP
     //Save the previous positions of the 'head' along the array
     for (int i = 0; i< points; i++) {
       newXArray[points-i] = newXArray[points-(i+1)]; 
-      newXArray[points-i] = newYArray[points-(i+1)];
-      print("\n[" + (points-i) + "]");
+      newYArray[points-i] = newYArray[points-(i+1)];
+    }
+    for (int i = 0; i< points; i++) {
     }
     //Calculate 'Head' position
     newXArray[0] = xDirection; 
-    newYArray[0] = yDirection; 
-
-      println("\nEND");  
-      for(int x=0;x<points;x++){
-         print("\nnewXArray["+ x + "]: " + newXArray[x]);
-       }
+    newYArray[0] = yDirection;
 
     smallerUsed = true; 
     largerUsed = false;
@@ -223,17 +156,11 @@ for(int t=0;t<points;t++){
     //Calculate 'Head' position
     xArray[0] = xDirection; 
     yArray[0] = yDirection;
-    
-    println("\nSTD Large");
-    for(int t=0;t<points;t++){
-  print("\nxArray["+ t + "]: " + xArray[t]);
-}
-    
   }
+
 
   //Function that updates the array ones it has shrunk
   void standardSmallArray() {
-
     for (int i = 0; i<points; i++) {
       newXArray[points-i] = newXArray[points-(i+1)]; 
       newYArray[points-i] = newYArray[points-(i+1)];
@@ -242,14 +169,8 @@ for(int t=0;t<points;t++){
     //Calculate 'Head' position
     newXArray[0] = xDirection; 
     newYArray[0] = yDirection;
-    
-      println("\nSTD Small");
-    for(int t=0;t<points;t++){
-  print("\nnewXArray["+ t + "]: " + newXArray[t]);
-}
-    stroke(0);
-    rect(xDirection, yDirection,5,5);
   }
+
 
   void drawShape() {
     stroke(0); 
@@ -273,7 +194,7 @@ for(int t=0;t<points;t++){
   }
 
 
-/*These are currently not being used */
+  /*These are currently not being used */
   float getPosX() {
     return xArray[0];
   }
@@ -281,38 +202,6 @@ for(int t=0;t<points;t++){
   float getPosY() {
     return yArray[0];
   }
-
-  //    void drawShape() {
-  //
-  //      stroke(0);
-  //      strokeWeight(10);
-  //      beginShape(POINTS);
-  //      for (int i=0; i<points; i++) {
-  //        vertex(xArray[i], yArray[i]);
-  //      } 
-  //      endShape();
-  //    }
-
-  void printArray() {
-    for (int i=0; i<points; i++) {
-      print("\n xARRAY:", xArray[i]);
-    }
-  }
-
-
-
-  //    void edgeCheck() {
-  //      if (xDirection <= 0) {
-  //        xDirection +=canX;
-  //      } else if (yDirection <= 0) {
-  //        yDirection += canY;
-  //      } else if ( xDirection >= canX)
-  //      {
-  //        xDirection -= canX;
-  //      } else if (yDirection >= canY) {
-  //        yDirection -=canY;
-  //      }
-  //    }
 
   void edgeCheck() {
     if (xDirection <= 0) {
