@@ -32,8 +32,8 @@ class Singer {
   void count() {
     for (TableRow row : table.rows ()) {
       if (row.getInt("Singer") == singerNo) {
-        pitch = append(pitch, 2 * row.getInt("Pitch"));
-        duration = append(duration, 2 * row.getInt("Duration"));
+        pitch = append(pitch, /*2 **/ row.getInt("Pitch"));
+        duration = append(duration, /*2 **/ row.getInt("Duration"));
       }
     }
   }
@@ -59,7 +59,7 @@ class Singer {
       retPitch = pitch[z];
       z++;
     }
-    print("\n Singer" + singerNo + " PITCH: ", retPitch);
+    print("\n Singer " + singerNo + " PITCH: ", retPitch);
     return retPitch;
   }
 

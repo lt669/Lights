@@ -54,6 +54,7 @@ void draw() {
   //  }
   //  else{
 
+  //Fades out parts of the screen
   noStroke();
   fill(255, 20);
   rect(random(canX), random(canY), canX/4, canY/4);
@@ -65,23 +66,23 @@ void draw() {
   }
   singer1.drawCir();
 
-  if (singer2.getNext() == true) {
-    singer2.setBright(s2.getPitch());
-    singer2.setSize(s2.getDuration());
-  }
-  singer2.drawCir();
-
-  if (singer3.getNext() == true) {
-    singer3.setBright(s3.getPitch());
-    singer3.setSize(s3.getDuration());
-  }
-  singer3.drawCir();
-
-  if (singer4.getNext() == true) {
-    singer4.setBright(s4.getPitch());
-    singer4.setSize(s4.getDuration());
-  }
-  singer4.drawCir();
+//  if (singer2.getNext() == true) {
+//    singer2.setBright(s2.getPitch());
+//    singer2.setSize(s2.getDuration());
+//  }
+//  singer2.drawCir();
+//
+//  if (singer3.getNext() == true) {
+//    singer3.setBright(s3.getPitch());
+//    singer3.setSize(s3.getDuration());
+//  }
+//  singer3.drawCir();
+//
+//  if (singer4.getNext() == true) {
+//    singer4.setBright(s4.getPitch());
+//    singer4.setSize(s4.getDuration());
+//  }
+//  singer4.drawCir();
 
   float imgX = random(-5, 5);
   float imgY = random(-5, 5);
