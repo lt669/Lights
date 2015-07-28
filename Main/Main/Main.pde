@@ -43,8 +43,8 @@ Singer s3;
 Singer s4;
 
 void setup() {
-  size(canX,canY);
-  
+  size(canX, canY);
+
   //Initialise new objects
   s1 = new Singer(1);
   s2 = new Singer(2);
@@ -72,17 +72,22 @@ void setup() {
 
 void draw() {
 
-   if(backCount == 0){
-    background(BGCol);
-  }
-  backCount++;
+//  if (backCount == 0) {
+//    background(360);
+//    println("BG: ",BGCol);
+//  }
+//  backCount++;
   
+  
+  background(360);
+
   //Depending on which key is pressed, select an object
   if (first == true) {// c = Circles
-   runCircleClass();
+    runCircleClass();
   } else if (second == true) {//v = Squigles
-   runSquigleClass();
+    runSquigleClass();
   }
+  println("BG END: ",BGCol);
 }
 
 void mousePressed() {
@@ -94,36 +99,24 @@ void mouseReleased() {
 }
 
 void keyPressed() {  
-  
+
   choice = Character.digit(key, 10);
- // choice = key;
   pressed = true;
-  println("Choice: ",choice);
-  
-  //pressedKey = key;
-  if(choice == 1 || (choice == -1 && first == true)){
-   backCount = 0;
-   first = true; 
-   second = false;
-   BGCol = 360;
-   circleKey = key;
-   //choice = 1;
-   println("INSIDE");
-  } else if (choice == 2 || (choice == -1 && second == true)){
-   backCount = 0;
-   BGCol = 360;
-   second = true; 
-   first = false;
-   squigleKey = key;
+
+  if (choice == 1 || (choice == -1 && first == true)) {
+    backCount = 0;
+    first = true; 
+    second = false;
+    BGCol = 360;
+    circleKey = key;
+  } else if (choice == 2 || (choice == -1 && second == true)) {
+    backCount = 0;
+    //BGCol = 360;
+    second = true; 
+    first = false;
+    squigleKey = key;
   }
-}  
-  
-//  if(first == true){
-//    firstKey = pressedKey;
-//  } else if (second = true){
-//   secondKey = pressedKey; 
-//  }
-  
+}
 
 
 void keyReleased() {
@@ -132,7 +125,7 @@ void keyReleased() {
 
 void pointsCalc() {
   if (pressed == true) {
-   // nPoints = Character.digit(key, 10);
+    // nPoints = Character.digit(key, 10);
     nPoints = squigleKey;
     // println("\nnPoints:",nPoints);
   } else if (pressed == false) {
@@ -142,63 +135,62 @@ void pointsCalc() {
   }
 }
 
-void runCircleClass(){
-  
-   // background(-1);
-  
-   //Fades out parts of the screen
-    noStroke();
-    fill(360, 20);
-    rect(random(canX), random(canY), canX/4, canY/4);
+void runCircleClass() {
 
-    if (singer1.getNext() == true) {
-      singer1.setBright(s1.getPitch());
-      singer1.setSize(s1.getDuration());
-    }
-    singer1.drawCir();
+  // background(-1);
 
-    if (singer2.getNext() == true) {
-      singer2.setBright(s2.getPitch());
-      singer2.setSize(s2.getDuration());
-    }
-    singer2.drawCir();
+  //Fades out parts of the screen
+  noStroke();
+  fill(360, 20);
+  rect(random(canX), random(canY), canX/4, canY/4);
 
-    if (singer3.getNext() == true) {
-      singer3.setBright(s3.getPitch());
-      singer3.setSize(s3.getDuration());
-    }
-    singer3.drawCir();
+  if (singer1.getNext() == true) {
+    singer1.setBright(s1.getPitch());
+    singer1.setSize(s1.getDuration());
+  }
+  singer1.drawCir();
 
-    if (singer4.getNext() == true) {
-      singer4.setBright(s4.getPitch());
-      singer4.setSize(s4.getDuration());
-    }
-    singer4.drawCir();
+  if (singer2.getNext() == true) {
+    singer2.setBright(s2.getPitch());
+    singer2.setSize(s2.getDuration());
+  }
+  singer2.drawCir();
 
-    float imgX = random(-5, 5);
-    float imgY = random(-5, 5);
+  if (singer3.getNext() == true) {
+    singer3.setBright(s3.getPitch());
+    singer3.setSize(s3.getDuration());
+  }
+  singer3.drawCir();
+
+  if (singer4.getNext() == true) {
+    singer4.setBright(s4.getPitch());
+    singer4.setSize(s4.getDuration());
+  }
+  singer4.drawCir();
+
+  float imgX = random(-5, 5);
+  float imgY = random(-5, 5);
 }
 
-void runSquigleClass(){
-    pointsCalc();
-    background(0);
+void runSquigleClass() {
+  pointsCalc();
+  background(0);
 
-    sq1.calcShape(nPoints);
-    sq1.edgeCheck();
-    sq1.drawShape();
+  sq1.calcShape(nPoints);
+  sq1.edgeCheck();
+  sq1.drawShape();
 
-    sq2.calcShape(nPoints);
-    sq2.drawShape();
-    sq2.edgeCheck();
+  sq2.calcShape(nPoints);
+  sq2.drawShape();
+  sq2.edgeCheck();
 
-    sq3.calcShape(nPoints);
-    sq3.drawShape();
-    sq3.edgeCheck();
-
-    sq4.calcShape(nPoints);
-    sq4.drawShape();
-    sq4.edgeCheck();
-    println("nPoints: ",nPoints);
+//  sq3.calcShape(nPoints);
+//  sq3.drawShape();
+//  sq3.edgeCheck();
+//
+//  sq4.calcShape(nPoints);
+//  sq4.drawShape();
+//  sq4.edgeCheck();
+//  println("nPoints: ", nPoints);
 }
-
 

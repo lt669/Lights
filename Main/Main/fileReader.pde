@@ -46,16 +46,9 @@ class Singer {
     }
   }
 
-  //  boolean finish(){
-  //   if (TableRow row == table.rows()){
-  //    return boolean FINISHED true;
-  //   } 
-  //  }
-
-
   //Returns the current value under 'Pitch' in the CSV file
   int getPitch() {
-    if (z < rowNo/4) {
+    if (z < rowNo/4) {// 4 = number of singers at the moment
       retPitch = pitch[z];
       z++;
     }

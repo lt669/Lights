@@ -14,10 +14,12 @@ class squigleClass {
   float randMove;
   int curve = 20;
   int divide = 16;
+  int randomDiameter;
+  int lowerD;
 
   boolean m;
-    boolean n;
-    boolean b;
+  boolean n;
+  boolean b;
 
   //Variables to signify which array was last edited
   boolean largerUsed;
@@ -41,20 +43,20 @@ class squigleClass {
 
   void calcShape(char morePoints) {
 
+    //After ever 10 counts, randomise movement
     if (count == 1) {
       //Each object is given a random direction
       randMove = round(random(0, 3));
       divide = round(random(2, 16));
       curve = round(random(2, 20));
+      randomDiameter =  round(random(10, 20));
+      lowerD = randomDiameter - 2;
     }
 
     //Calculate the direction the 'head' will be moving in
     if (check == 0) {
-
-
-
       //Random number to slightly move the hovering circle
-      float p = random(18, 20);
+      float p = random(lowerD, randomDiameter);
       xDirection += cos(TWO_PI*count/10)*p; 
       yDirection += sin(TWO_PI*count/10)*p;
     } else if (check == 1) {
@@ -103,7 +105,7 @@ class squigleClass {
       }
     }
     //Restart counter after 10
-    if (count == 10) {
+    if (count == 100) {
       count = 1;
     } else {
       count++;
@@ -219,14 +221,12 @@ class squigleClass {
 
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
-    
-println("m: " + m + " n: " + n + " b: " + b + " SQUIGLY: " + squigleKey);
-  
-  if(squigleKey == 'k'){
-  m = false;
-  n= false;
-  b = false;
-  }
+
+    if (squigleKey == 'k') {
+      m = false;
+      n= false;
+      b = false;
+    }
 
     if (squigleKey == 'm' || m ==true) {
       map(xDirection, 0, canX, 0, 360);
@@ -278,7 +278,8 @@ println("m: " + m + " n: " + n + " b: " + b + " SQUIGLY: " + squigleKey);
       n = true;
       b = false;
     } else if (squigleKey == 'b' || b == true) {
-      background(-1);
+      backCount = 0;
+      BGCol = 255;
       map(xDirection, 0, canX, 0, 360);
       map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
@@ -305,53 +306,6 @@ println("m: " + m + " n: " + n + " b: " + b + " SQUIGLY: " + squigleKey);
       b = true;
     }
   }
-
-  //    void drawShape() {
-  //    
-  //    map(xDirection, 0, canX, 0 ,360);
-  //    map(yDirection, 0, canX, 0 ,360);
-  //    colorMode(HSB,360);
-  //    stroke(xDirection,yDirection,100); 
-  //    strokeWeight(2);
-  //    beginShape(TRIANGLES); 
-  //    if (largerUsed == true) {
-  //      for (int i=0; i<xArray.length; i++) {
-  //        vertex(xArray[i], yArray[i]);
-  //      }
-  //    } else if (smallerUsed == true) {
-  //      for (int x=0; x<newXArray.length; x++) {
-  //        vertex(newXArray[x], newYArray[x]);
-  //      }
-  //    } else {
-  //      for (int i=0; i<xArray.length; i++) {
-  //        vertex(xArray[i], yArray[i]);
-  //      }
-  //    }
-  //    endShape();
-  //  }
-
-
-  // void drawShape() {
-  //    stroke(0); 
-  //    beginShape(POLYGON); 
-  //    if (largerUsed == true) {
-  //      for (int i=1; i<xArray.length; i++) {
-  //        vertex(xArray[0], yArray[0]);
-  //        quadraticVertex(xArray[0], yArray[0],xArray[i], yArray[i]);
-  //      }
-  //    } else if (smallerUsed == true) {
-  //      for (int x=1; x<newXArray.length; x++) {
-  //        vertex(xArray[0], yArray[0]); 
-  //        quadraticVertex(xArray[0], yArray[0],newXArray[x], newYArray[x]);
-  //      }
-  //    } else {
-  //      for (int i=1; i<xArray.length; i++) {
-  //       vertex(xArray[0], yArray[0]); 
-  //       quadraticVertex(xArray[0], yArray[0],xArray[i], yArray[i]);
-  //      }
-  //    }
-  //    endShape();
-  //  }
 
   /*These are currently not being used */
   float getPosX() {

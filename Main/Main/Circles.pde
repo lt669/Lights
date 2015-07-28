@@ -72,7 +72,7 @@ class Cir {
       print("\n DONE");
     } else if (DONE != true && secondPassed == true) { //If its maximum size is not reached, increase size
       size++;
-    } else if (DONE == true && size != 0){
+    } else if (DONE == true && size != 0) {
       size = abs(size-1);
     }
 
@@ -101,34 +101,32 @@ class Cir {
     //    size = 0;
     //  }
 
-   if(circleKey == 'w'){
-     println("W PRESSED!");
-    colorMode(HSB, 360,100,100);
-    map(bright, 0, 12, 0 ,360);
-    Saturation = bright;
-    Brightness = bright;
-    Saturation = round(map(Saturation, 0, 360, 0, 100));
-    Brightness = round(map(Brightness, 0, 360, 0, 100));
-   // stroke(bright,Saturation, Brightness);
-   noStroke();
-    fill(bright, Saturation, Brightness, bright);
-    ellipse(posX, posY, size*5, size*5);
-   } else if (circleKey == 's'){
-    colorMode(RGB,255,255,255);
-    stroke(bright, bright, bright);
-    fill(0, 0, 0, bright);
-    ellipse(posX, posY, size*5, size*5);
-   }
+    if (circleKey == 'w') {
+      colorMode(HSB, 360, 100, 100);
+      map(bright, 0, 12, 0, 360);
+      Saturation = bright;
+      Brightness = bright;
+      Saturation = round(map(Saturation, 0, 360, 0, 100));
+      Brightness = round(map(Brightness, 0, 360, 0, 100));
+      // stroke(bright,Saturation, Brightness);
+      noStroke();
+      fill(bright, Saturation, Brightness, bright);
+      ellipse(posX, posY, size*5, size*5);
+    } else if (circleKey == 's') {
+      colorMode(RGB, 255, 255, 255);
+      stroke(bright, bright, bright);
+      fill(0, 0, 0, bright);
+      ellipse(posX, posY, size*5, size*5);
+    }
 
     //Reset the counter
     if (seconds == maxSize) {
       last = millis();
     }
-    
-  //  println("DONE: " + DONE + " - Seconds: " + seconds + " - maxSize: " + maxSize + " - Size: " + size + " - Bright: " + bright + " - Saturation: " + Saturation + " - Key: " + pressedKey);
-    
+
+    //  println("DONE: " + DONE + " - Seconds: " + seconds + " - maxSize: " + maxSize + " - Size: " + size + " - Bright: " + bright + " - Saturation: " + Saturation + " - Key: " + pressedKey);
   }
-  
+
   boolean getNext() {
     return NEXT;
   }
@@ -140,6 +138,5 @@ class Cir {
   void setBright(int BRIGHT) {
     bright = BRIGHT;
   }
-
 }
 

@@ -27,7 +27,7 @@ void setup() {
 
 
 void draw() {
-  pointsCalc();
+  pointsCalc(); 
   background(0);
 
   sq1.calcShape(nPoints);

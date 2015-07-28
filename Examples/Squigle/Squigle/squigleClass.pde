@@ -221,7 +221,7 @@ class squigleClass {
     colorMode(HSB,360);
     stroke(xDirection,yDirection,100); 
     strokeWeight(2);
-    fill(xDirection,yDirection,100);
+    //fill(xDirection,yDirection,100);
     beginShape(); 
     if (largerUsed == true) {
       for (int i=0; i<xArray.length; i++) {
