@@ -1,6 +1,6 @@
 //Shared Variables
 int canX = 900;
-int canY = 600;
+int canY = 1000;
 boolean first, second;
 int backCount = 0;
 int BGCol;

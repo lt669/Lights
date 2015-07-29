@@ -105,21 +105,15 @@ class Cir {
 
     if (circleKey == 'w') {
       
-      //Check whether the brightness values have already been mapped
-//      if(w == false){
-//        bright = round(map(bright, 0, 12, 0, 360)); 
-//      }
-      
       colorMode(HSB, 360, 100, 100);
       
-      println("bright: " + bright + " - Saturation: " + Saturation + " - Brightness: " + Brightness);
+//      println("bright: " + bright + " - Saturation: " + Saturation + " - Brightness: " + Brightness);
 
       // stroke(bright,Saturation, Brightness);
       noStroke();
       fill(bright, Saturation, Brightness, bright);
       ellipse(posX, posY, size*5, size*5);
-      
-      //w = true;
+
     } else if (circleKey == 's') {
       colorMode(RGB, 255, 255, 255);
       stroke(bright, bright, bright,bright);

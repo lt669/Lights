@@ -21,6 +21,9 @@ class squigleClass {
   boolean n;
   boolean b;
 
+  //Check whether the number of points received is greater or larger than the last value
+  int[] pointsCheck;
+
   //Variables to signify which array was last edited
   boolean largerUsed;
   boolean smallerUsed;
@@ -36,12 +39,25 @@ class squigleClass {
     yArray = new float[points+1];
     newXArray = new float[points +1];
     newYArray = new float[points +1];
+    pointsCheck = new int[2];
 
     xDirection = posX; 
     yDirection = posY;
   }
 
   void calcShape(char morePoints) {
+
+    pointsCheck[0] = morePoints;
+    points = pointsCheck[0];
+    if (pointsCheck[0] > pointsCheck[1]) {
+      morePoints = 'p'; //Change this eventually
+    } else if (pointsCheck[0] < pointsCheck[1]) {
+      morePoints = 'o';
+    }
+
+    //Shift value of 'points' down the array
+    pointsCheck[1] = pointsCheck[0];
+
 
     //After ever 10 counts, randomise movement
     if (count == 1) {
@@ -116,7 +132,7 @@ class squigleClass {
   void largerArray() {
 
     //Increase number of points in array
-    points += 1; 
+    //points += 1; 
 
     //If the last array used was the smaller one, copy data to new array
     if (smallerUsed == true) {
@@ -207,7 +223,6 @@ class squigleClass {
     yArray[0] = yDirection;
   }
 
-
   //Function that updates the array ones it has shrunk
   void standardSmallArray() {
     for (int i = 0; i<points; i++) {
@@ -229,8 +244,8 @@ class squigleClass {
     }
 
     if (squigleKey == 'm' || m ==true) {
-      map(xDirection, 0, canX, 0, 360);
-      map(yDirection, 0, canX, 0, 360);
+      //      map(xDirection, 0, canX, 0, 360);
+      //      map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
       stroke(xDirection, yDirection, 100); 
       strokeWeight(2);
@@ -255,7 +270,7 @@ class squigleClass {
       b = false;
     } else if (squigleKey == 'n' || n == true) {
       //    map(xDirection, 0, canX, 0 ,360);
-      map(yDirection, 0, canX, 0, 360);
+      //    map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
       stroke(xDirection, yDirection, 100); 
       strokeWeight(2);
@@ -280,10 +295,10 @@ class squigleClass {
     } else if (squigleKey == 'b' || b == true) {
       backCount = 0;
       BGCol = 360;
-      map(xDirection, 0, canX, 0, 360);
-      map(yDirection, 0, canX, 0, 360);
+      int xColour = round(map(xDirection, 0, canX, 0, 360));
+      //yColor = map(yDirection, 0, canY, 0, 360);
       colorMode(HSB, 360);
-      stroke(xDirection, yDirection, 100); 
+      stroke(xColour, xColour, 100); 
       strokeWeight(2);
       // fill(xDirection,yDirection,100);
       beginShape(); 
@@ -315,6 +330,21 @@ class squigleClass {
   float getPosY() {
     return yArray[0];
   }
+
+  //Receive number of points (duration)
+  // int setPoints(int setPOINTS){
+  //   pointsCheck[0] = setPOINTS;
+  //   points = pointsCheck[0];
+  //   if(pointsCheck[0] > pointsCheck[1]){
+  //    morePoints = 'p'; //Change this eventually
+  //   } else if (pointsCheck[0] < pointsCheck[1]){
+  //    morePoints = 'o'; 
+  //   }
+  //   
+  //   //Shift value of 'points' down the array
+  //   pointsCheck[1] = pointsCheck[0];
+  //   
+  // }
 
   void edgeCheck() {
     if (xDirection <= 0) {
