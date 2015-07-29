@@ -19,6 +19,8 @@ class Cir {
   int[] secondArray = new int[2]; // place to compair seconds values
   float Saturation;
   float Brightness;
+  
+  boolean w;
 
   //Constructor
   Cir(int iPosX, int iPosY, int iSize, int iBright) {
@@ -29,7 +31,7 @@ class Cir {
   }
 
   void drawCir() {
-
+    
     //Initialise counters
     millis = millis() - last;
     seconds = round(millis/1000);
@@ -69,7 +71,7 @@ class Cir {
     //Alter circle size
     if (size == maxSize && DONE != true) { //Once circle has reached maxSize, DONE
       DONE = true;
-      print("\n DONE");
+//      print("\n DONE");
     } else if (DONE != true && secondPassed == true) { //If its maximum size is not reached, increase size
       size++;
     } else if (DONE == true && size != 0) {
@@ -90,7 +92,7 @@ class Cir {
     //  line(canX/2,canY/2,posX,posY);
 
     // Draw ellipse
-    bright = 255 * 12/(bright+1);
+  //  bright = 360 * 12/(bright+1);
 
     //        stroke(255);
     //        fill(255);
@@ -102,20 +104,32 @@ class Cir {
     //  }
 
     if (circleKey == 'w') {
+      
+      //Check whether the brightness values have already been mapped
+//      if(w == false){
+//        bright = round(map(bright, 0, 12, 0, 360)); 
+//      }
+      
       colorMode(HSB, 360, 100, 100);
-      map(bright, 0, 12, 0, 360);
-      Saturation = bright;
-      Brightness = bright;
-      Saturation = round(map(Saturation, 0, 360, 0, 100));
-      Brightness = round(map(Brightness, 0, 360, 0, 100));
+      
+      println("bright: " + bright + " - Saturation: " + Saturation + " - Brightness: " + Brightness);
+
       // stroke(bright,Saturation, Brightness);
       noStroke();
       fill(bright, Saturation, Brightness, bright);
       ellipse(posX, posY, size*5, size*5);
+      
+      //w = true;
     } else if (circleKey == 's') {
       colorMode(RGB, 255, 255, 255);
-      stroke(bright, bright, bright);
+      stroke(bright, bright, bright,bright);
       fill(0, 0, 0, bright);
+      ellipse(posX, posY, size*5, size*5);
+    } else if (circleKey == 'd'){
+      colorMode(HSB, 360, 100, 100);
+      map(bright, 0, 12, 0, 360);
+      stroke(bright, bright, bright,bright);
+      fill(0, 0, 100, 0); //Setting last value to 0 makes the circles centres transparent 
       ellipse(posX, posY, size*5, size*5);
     }
 
@@ -136,7 +150,10 @@ class Cir {
   }
 
   void setBright(int BRIGHT) {
-    bright = BRIGHT;
+  //  bright = BRIGHT;
+    bright = round(map(BRIGHT, 0, 12, 0, 360)); 
+    Saturation = round(map(BRIGHT, 0, 12, 0, 100));
+    Brightness = round(map(BRIGHT, 0, 12, 0, 100));
   }
 }
 

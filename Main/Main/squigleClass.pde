@@ -279,7 +279,7 @@ class squigleClass {
       b = false;
     } else if (squigleKey == 'b' || b == true) {
       backCount = 0;
-      BGCol = 255;
+      BGCol = 360;
       map(xDirection, 0, canX, 0, 360);
       map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);

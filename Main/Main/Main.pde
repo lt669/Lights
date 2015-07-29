@@ -72,14 +72,15 @@ void setup() {
 
 void draw() {
 
-//  if (backCount == 0) {
-//    background(360);
-//    println("BG: ",BGCol);
-//  }
-//  backCount++;
+  if (backCount == 0) {
+    colorMode(HSB, 360, 100, 100);
+    background(360);
+    println("BG: ",BGCol);
+  }
+  backCount++;
   
   
-  background(360);
+  //background(360);
 
   //Depending on which key is pressed, select an object
   if (first == true) {// c = Circles
@@ -87,7 +88,7 @@ void draw() {
   } else if (second == true) {//v = Squigles
     runSquigleClass();
   }
-  println("BG END: ",BGCol);
+  //println("BG END: ",BGCol);
 }
 
 void mousePressed() {
@@ -111,7 +112,7 @@ void keyPressed() {
     circleKey = key;
   } else if (choice == 2 || (choice == -1 && second == true)) {
     backCount = 0;
-    //BGCol = 360;
+    BGCol = 360;
     second = true; 
     first = false;
     squigleKey = key;
@@ -174,7 +175,7 @@ void runCircleClass() {
 
 void runSquigleClass() {
   pointsCalc();
-  background(0);
+  //background(0);
 
   sq1.calcShape(nPoints);
   sq1.edgeCheck();
