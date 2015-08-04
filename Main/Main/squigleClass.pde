@@ -149,7 +149,7 @@ class squigleClass {
 
     //Save the previous positions of the 'head' along the array
     for (int i = 0; i<points; i++) {
-      xArray[points-i] = xArray[points-(i+1)]; 
+      xArray[points-i] = xArray[points-(i+1)];
       yArray[points-i] = yArray[points-(i+1)];
     }
     //Calculate new 'Head' position
