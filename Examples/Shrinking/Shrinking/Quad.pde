@@ -39,8 +39,7 @@ class Quad {
     int hue = round(random(0, 360));
     int sat = round(random(0, 100));
     int bri = round(random(0, 100));
-    int alpha = round(random(0, 100));
-  //  println("bri",bri);
+    int alpha = 100; //round(random(0, 100));
 
     //Store varying elements into array
     shapesArray[e][Hue] = hue;
