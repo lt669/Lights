@@ -7,12 +7,12 @@ void setup(){
   size(canX, canY);
   
   Q1 = new Quad(canX/2, canY/2, 10);
- // noLoop();
+  noLoop();
 }
 
 void draw(){
   background(-1);
-  Q1.drawQuad();
+  Q1.doQuad();
   
 }
 

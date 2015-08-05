@@ -25,6 +25,7 @@ class Quad {
     yPos = iYPos;
     xSize = ySize = iSize;
 
+    //Set initial conditions in array
     shapesArray[e][xPosition] = xPos;
     shapesArray[e][yPosition] = yPos;
     shapesArray[e][sizeX] = xSize;
@@ -32,17 +33,16 @@ class Quad {
   }
 
   void drawQuad() {
-    //
-    println("e: ", e);
-    //    println("arrayLength: ", shapesArray.length);
-    //    println("Choose: ", chooseStart);
-
-    colorMode(HSB, 360, 100, 100);
+    
+    //Set randomised colours
+    colorMode(HSB, 360, 100, 100, 100);
     int hue = round(random(0, 360));
     int sat = round(random(0, 100));
     int bri = round(random(0, 100));
+    int alpha = round(random(0, 100));
+  //  println("bri",bri);
 
-    //Store elements into array
+    //Store varying elements into array
     shapesArray[e][Hue] = hue;
     shapesArray[e][Saturation] = sat;
     shapesArray[e][Brightness] = bri;
@@ -50,7 +50,8 @@ class Quad {
 
     //Loop through array and draw all new shapes
     for (int x=0; x<shapesArray.length; x++) { 
-      fill(shapesArray[x][Hue], shapesArray[x][Saturation], shapesArray[x][Brightness]);
+      noStroke();
+      fill(shapesArray[x][Hue], shapesArray[x][Saturation], shapesArray[x][Brightness],alpha);
       rect(shapesArray[x][xPosition], shapesArray[x][yPosition], shapesArray[x][sizeX], shapesArray[x][sizeY]);
     }
 
@@ -96,14 +97,11 @@ class Quad {
     //Calculate size of the NEW shape
     shapesArray[e+1][sizeX] = xSize;
     shapesArray[e+1][sizeY] = ySize;
-    
-    chooseStart = round(random(0, 1));
-
+  
     //Randomly selects where to start drawing the rectagles
+    chooseStart = round(random(0, 1));
     shapesArray[e+1][Choose] = chooseStart;
 
-    //Error Checking
-    println("chooseStart: ", chooseStart);
 
     //Calculate the new position of all the shapes
     for (i=0; i<shapesArray.length - 1; i++) {
@@ -128,7 +126,7 @@ class Quad {
     e++;
 
     for (i=0; i<shapesArray.length; i++) {
-      println("i: "+i+" xPos: "+shapesArray[i][xPosition]+" yPos: "+shapesArray[i][yPosition]+" xSize: "+shapesArray[i][sizeX]+" ySize: "+shapesArray[i][sizeY]+" Choose: "+ shapesArray[i][Choose]);
+     // println("i: "+i+" xPos: "+shapesArray[i][xPosition]+" yPos: "+shapesArray[i][yPosition]+" xSize: "+shapesArray[i][sizeX]+" ySize: "+shapesArray[i][sizeY]+" Choose: "+ shapesArray[i][Choose]);
     }
   }
 }
