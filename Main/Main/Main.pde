@@ -78,9 +78,6 @@ void draw() {
     println("BG: ",BGCol);
   }
   backCount++;
-  
-  
-  //background(360);
 
   //Depending on which key is pressed, select an object
   if (first == true) {// c = Circles
@@ -88,7 +85,6 @@ void draw() {
   } else if (second == true) {//v = Squigles
     runSquigleClass();
   }
-  //println("BG END: ",BGCol);
 }
 
 void mousePressed() {
