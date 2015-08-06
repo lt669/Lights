@@ -13,7 +13,7 @@ void setup(){
 void draw(){
   background(-1);
   Q1.doQuad();
-  Q1.printArray();
+  //Q1.printArray();
   
 }
 
