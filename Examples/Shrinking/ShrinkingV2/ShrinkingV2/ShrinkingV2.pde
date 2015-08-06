@@ -6,7 +6,7 @@ Quad Q1;
 void setup(){
   size(canX, canY);
   
-  Q1 = new Quad(canX/2, canY/2, 10);
+  Q1 = new Quad(canX/2, canY/2, 100);
   noLoop();
 }
 

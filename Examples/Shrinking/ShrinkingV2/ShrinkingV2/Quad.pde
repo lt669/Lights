@@ -62,10 +62,11 @@ class Quad {
     calcPosition(); //Test to see whether the shape can be drawn in this direction
     //    print("\nreChoose: ", reChoose);
     if (reChoose == true) {
+      movement -= 1; //Draw in the same direction again
       chooseDirection(); //Draw new shape in same as previous direction
     }
     shapesArray[e+1][Choose] = movement-1;
-    if(shapesArray[e+1][Choose] == -1){
+    if (shapesArray[e+1][Choose] == -1) {
       shapesArray[e+1][Choose] = 3;
     }
     //    print(" - End Movement ", movement);
@@ -175,14 +176,21 @@ class Quad {
 
   void calcPosition() {
     reChoose = false;
-    //Loop through all shapes and check for any overlap 
-    for (int i=0; i<shapesArray.length - 1; i++) {  //Dont check against itself
-      //check for any collisions in the X direction
-      if (shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] >= shapesArray[i][xPosition] && shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] <= shapesArray[i][xPosition] + shapesArray[i][sizeX] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
-        movement -= 1; //Draw in the same direction again
-        reChoose = true;
-        // println("X collision");
-        println("["+i+"/"+e+"]: "+ shapesArray[i][xPosition] +"," +shapesArray[i][yPosition] + "->" + (shapesArray[i][xPosition]+shapesArray[i][sizeX]) +"," + (shapesArray[i][yPosition]+shapesArray[i][sizeY]) + " - " + shapesArray[e][xPosition] + "," + shapesArray[e][yPosition] + "->" + (shapesArray[e][xPosition]+shapesArray[e][sizeX]) + "," + (shapesArray[e][yPosition]+shapesArray[e][sizeY]));
+    //For the current shape,check whether any of the pixles withing the shape fall within the area of any of the other shapes
+    for (int y = shapesArray[e+1][yPosition]; y< (shapesArray[e+1][yPosition]+shapesArray[e+1][sizeY]); y++) {
+      for (int x = shapesArray[e+1][xPosition]; x< (shapesArray[e+1][xPosition]+shapesArray[e+1][sizeX]); x++) {
+        for (int i=0; i<shapesArray.length - 1; i++) {  //Dont check against itself
+           if (x > shapesArray[i][xPosition] && x < shapesArray[i][xPosition] + shapesArray[i][sizeX] && y > shapesArray[i][yPosition] && y < shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
+          //if (shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] >= shapesArray[i][xPosition] && shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] <= shapesArray[i][xPosition] + shapesArray[i][sizeX] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
+            reChoose = true;
+            stroke(330,34,100);
+            fill(360,100,100);
+            rect(x,y,1,1);
+            // println("X collision");
+            //println("["+i+"/"+e+"]: "+ shapesArray[i][xPosition] +"," +shapesArray[i][yPosition] + "->" + (shapesArray[i][xPosition]+shapesArray[i][sizeX]) +"," + (shapesArray[i][yPosition]+shapesArray[i][sizeY]) + " - " + shapesArray[e][xPosition] + "," + shapesArray[e][yPosition] + "->" + (shapesArray[e][xPosition]+shapesArray[e][sizeX]) + "," + (shapesArray[e][yPosition]+shapesArray[e][sizeY]));
+         //  println("x: " + x + " y: " + y);
+        }
+        }
       }
       //
       //      if (shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) { 
@@ -226,9 +234,9 @@ class Quad {
 
   void Left() {
     //If the previous movement was also left
-    if(shapesArray[e][Choose] == 2){
-       shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e+1][sizeX] ;
-       shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
+    if (shapesArray[e][Choose] == 2) {
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e+1][sizeX] ;
+      shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
     }
     shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
     shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
@@ -240,6 +248,12 @@ class Quad {
   }
 
   void Up() {
+    if (shapesArray[e][Choose] == up) {
+    shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
+    shapesArray[e+1][yPosition] = shapesArray[e][yPosition] + shapesArray[e][sizeY];
+    shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
+    shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
+    }
     shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e][sizeX];
     shapesArray[e+1][yPosition] = shapesArray[e][yPosition];// + shapesArray[e][sizeY]; // THIS SIGN MIGHT NEED CHANGING
     shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
