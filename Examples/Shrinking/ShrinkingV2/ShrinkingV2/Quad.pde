@@ -55,12 +55,12 @@ class Quad {
     shapesArray[e][Choose] = chooseStart;
 
 
-    drawQuad();
-    extendArray();
-    chooseDirection();
-    println("Movement", movement);
+    drawQuad(); //Draw all previously calculated shapes
+    extendArray(); // Add an extra element to the array
+    chooseDirection(); // Calculate how the next shape will be drawn
+    println("Start Movement", movement);
 
-    //Calculate new size of the shapes
+    //Calculate new size of the previously drawn shapes
     for (i=0; i<shapesArray.length - 1; i++) { 
       if (shapesArray[i][sizeX] == 0) {
         //Do nothing
@@ -87,7 +87,7 @@ class Quad {
     calcPosition();
 
 
-
+    println("End Movement ", movement);
     e++;
 
     for (i=0; i<shapesArray.length; i++) {
@@ -149,14 +149,14 @@ class Quad {
       //check for any collisions in the X direction
       if (shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] >= shapesArray[i][xPosition] && shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] <= shapesArray[i][xPosition] + shapesArray[i][sizeX] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
         movement -= 1; //Draw in the same direction again
-       // println("X collision");
-       println("["+i+"/"+e+"]: "+ shapesArray[i][xPosition] +"," +shapesArray[i][yPosition] + "->" + (shapesArray[i][xPosition]+shapesArray[i][sizeX]) +"," + (shapesArray[i][yPosition]+shapesArray[i][sizeY]) + " - " + shapesArray[e][xPosition] + "," + shapesArray[e][yPosition] + "->" + (shapesArray[e][xPosition]+shapesArray[e][sizeX]) + "," + (shapesArray[e][yPosition]+shapesArray[e][sizeY]));
+        // println("X collision");
+        println("["+i+"/"+e+"]: "+ shapesArray[i][xPosition] +"," +shapesArray[i][yPosition] + "->" + (shapesArray[i][xPosition]+shapesArray[i][sizeX]) +"," + (shapesArray[i][yPosition]+shapesArray[i][sizeY]) + " - " + shapesArray[e][xPosition] + "," + shapesArray[e][yPosition] + "->" + (shapesArray[e][xPosition]+shapesArray[e][sizeX]) + "," + (shapesArray[e][yPosition]+shapesArray[e][sizeY]));
       }
-//
-//      if (shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) { 
-//        movement -= 1; //Draw in the same direction again
-//        println("Y collision");
-//      }
+      //
+      //      if (shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) { 
+      //        movement -= 1; //Draw in the same direction again
+      //        println("Y collision");
+      //      }
     }
     if (movement <= -1) {
       movement = right;
@@ -169,7 +169,11 @@ class Quad {
     }
   }
 
-
+  void printArray() {
+    for (int i=0; i<shapesArray.length; i++) {//Might need to +1
+      println(""+i+" x: "+shapesArray[i][xPosition]+" y: " +shapesArray[i][yPosition]+" xEnd: " +(shapesArray[i][xPosition]+shapesArray[i][sizeX])+" yEnd: "+(shapesArray[i][yPosition]+shapesArray[i][sizeY]));
+    }
+  }
 
 
   void Right() {
@@ -190,12 +194,11 @@ class Quad {
   void Left() {
     shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
     shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
-//    shapesArray[e+1][sizeX] = -(shapesArray[e][sizeX]); //THIS MAY NOT BE CORRECT
-//    shapesArray[e+1][sizeY] = -(shapesArray[e][sizeY]);
-    
+    //    shapesArray[e+1][sizeX] = -(shapesArray[e][sizeX]); //THIS MAY NOT BE CORRECT
+    //    shapesArray[e+1][sizeY] = -(shapesArray[e][sizeY]);
+
     shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX] - (shapesArray[e+1][sizeX])*2;
     shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
-    
   }
 
   void Up() {
