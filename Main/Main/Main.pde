@@ -12,7 +12,7 @@ int pit = 0;
 PImage img;
 char circleKey;
 char squigleKey;
-int choice;
+int choice = 0;
 //char choice;
 
 //Squigle Variables
@@ -26,7 +26,6 @@ boolean pressed;
 float move;
 
 //Set up classes
-
 squigleClass sq1;
 squigleClass sq2;
 squigleClass sq3;
@@ -75,16 +74,14 @@ void draw() {
   if (backCount == 0) {
     colorMode(HSB, 360, 100, 100);
     background(360);
-    println("BG: ",BGCol);
+    println("BG: ", BGCol);
   }
   backCount++;
-
+background(-1);
   //Depending on which key is pressed, select an object
-  if (first == true) {// c = Circles
     runCircleClass();
-  } else if (second == true) {//v = Squigles
     runSquigleClass();
-  }
+  
 }
 
 void mousePressed() {
@@ -95,24 +92,36 @@ void mouseReleased() {
   check = 0;
 }
 
-void keyPressed() {  
+//void keyPressed() {  
+//
+//  choice = Character.digit(key, 10);
+//  pressed = true;
+//
+//  if (choice == 1 || (choice == -1 && first == true)) {
+//    backCount = 0;
+//    first = true; 
+//    second = false;
+//    BGCol = 360;
+//    circleKey = key;
+//  } else if (choice == 2 || (choice == -1 && second == true)) {
+//    backCount = 0;
+//    BGCol = 360;
+//    second = true; 
+//    first = false;
+//    squigleKey = key;
+//  }
+//}
 
-  choice = Character.digit(key, 10);
-  pressed = true;
-
-  if (choice == 1 || (choice == -1 && first == true)) {
-    backCount = 0;
-    first = true; 
-    second = false;
-    BGCol = 360;
-    circleKey = key;
-  } else if (choice == 2 || (choice == -1 && second == true)) {
-    backCount = 0;
-    BGCol = 360;
-    second = true; 
-    first = false;
-    squigleKey = key;
+void keyPressed() {
+  int select = Character.digit(key, 10);
+  if (select == 1) {
+    choice++;
+  } else if (select == 2) {
+    choice--;
   }
+  pressed = true;
+  println("Select", select);
+  println("Choice: ",choice);
 }
 
 
@@ -121,9 +130,10 @@ void keyReleased() {
 }
 
 void pointsCalc() {
-  if (pressed == true) {
+  if (pressed == true && choice == 4) {
     // nPoints = Character.digit(key, 10);
-    nPoints = squigleKey;
+    nPoints = key;// squigleKey;
+    println("nPoints: ",nPoints);
     // println("\nnPoints:",nPoints);
   } else if (pressed == false) {
     nPoints = 0;
@@ -170,6 +180,7 @@ void runCircleClass() {
 }
 
 void runSquigleClass() {
+ // nPoints = key; // Character.digit(key, 10);
   pointsCalc();
   //background(0);
 
@@ -181,13 +192,13 @@ void runSquigleClass() {
   sq2.drawShape();
   sq2.edgeCheck();
 
-//  sq3.calcShape(nPoints);
-//  sq3.drawShape();
-//  sq3.edgeCheck();
-//
-//  sq4.calcShape(nPoints);
-//  sq4.drawShape();
-//  sq4.edgeCheck();
-//  println("nPoints: ", nPoints);
+  //  sq3.calcShape(nPoints);
+  //  sq3.drawShape();
+  //  sq3.edgeCheck();
+  //
+  //  sq4.calcShape(nPoints);
+  //  sq4.drawShape();
+  //  sq4.edgeCheck();
+  //  println("nPoints: ", nPoints);
 }
 

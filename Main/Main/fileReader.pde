@@ -52,7 +52,7 @@ class Singer {
       retPitch = pitch[z];
       z++;
     }
-    print("\n Singer " + singerNo + " PITCH: ", retPitch);
+//    print("\n Singer " + singerNo + " PITCH: ", retPitch);
     return retPitch;
   }
 
@@ -62,7 +62,7 @@ class Singer {
       retDuration = duration[x];
       x++;
     }
-    print(" DURATION: ", retDuration);
+//    print(" DURATION: ", retDuration);
     return retDuration;
   }
 }

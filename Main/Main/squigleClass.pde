@@ -47,17 +47,16 @@ class squigleClass {
 
   void calcShape(char morePoints) {
 
-    pointsCheck[0] = morePoints;
-    points = pointsCheck[0];
-    if (pointsCheck[0] > pointsCheck[1]) {
-      morePoints = 'p'; //Change this eventually
-    } else if (pointsCheck[0] < pointsCheck[1]) {
-      morePoints = 'o';
-    }
+//    pointsCheck[0] = morePoints;
+//    points = pointsCheck[0];
+//    if (pointsCheck[0] > pointsCheck[1]) {
+//      morePoints = 'p'; //Change this eventually
+//    } else if (pointsCheck[0] < pointsCheck[1]) {
+//      morePoints = 'o';
+//    }
 
     //Shift value of 'points' down the array
     pointsCheck[1] = pointsCheck[0];
-
 
     //After ever 10 counts, randomise movement
     if (count == 1) {
@@ -108,6 +107,7 @@ class squigleClass {
     }
     //Depending on input calculate next squigle positions
     if (morePoints == 'p') {
+      println("Large Array");
       largerArray();
     } else if (morePoints == 'o') {
       smallerArray();
@@ -132,7 +132,7 @@ class squigleClass {
   void largerArray() {
 
     //Increase number of points in array
-    //points += 1; 
+    points += 1; 
 
     //If the last array used was the smaller one, copy data to new array
     if (smallerUsed == true) {
@@ -237,13 +237,8 @@ class squigleClass {
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
 
-    if (squigleKey == 'k') {
-      m = false;
-      n= false;
-      b = false;
-    }
 
-    if (squigleKey == 'm' || m ==true) {
+    if (choice == 4) {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
@@ -268,7 +263,7 @@ class squigleClass {
       m = true;
       n = false;
       b = false;
-    } else if (squigleKey == 'n' || n == true) {
+    } else if (choice == 5) {
       //    map(xDirection, 0, canX, 0 ,360);
       //    map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
@@ -292,7 +287,7 @@ class squigleClass {
       m = false;
       n = true;
       b = false;
-    } else if (squigleKey == 'b' || b == true) {
+    } else if (choice == 6) {
       backCount = 0;
       BGCol = 360;
       int xColour = round(map(xDirection, 0, canX, 0, 360));

@@ -103,7 +103,7 @@ class Cir {
     //    size = 0;
     //  }
 
-    if (circleKey == 'w') {
+    if (choice == 1) {
       
       colorMode(HSB, 360, 100, 100);
       
@@ -114,12 +114,12 @@ class Cir {
       fill(bright, Saturation, Brightness, bright);
       ellipse(posX, posY, size*5, size*5);
 
-    } else if (circleKey == 's') {
+    } else if (choice == 2) {
       colorMode(RGB, 255, 255, 255);
       stroke(bright, bright, bright,bright);
       fill(0, 0, 0, bright);
       ellipse(posX, posY, size*5, size*5);
-    } else if (circleKey == 'd'){
+    } else if (choice == 3){
       colorMode(HSB, 360, 100, 100);
       map(bright, 0, 12, 0, 360);
       stroke(bright, bright, bright,bright);
