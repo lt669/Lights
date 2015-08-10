@@ -32,20 +32,20 @@ class Cir {
 
   void drawCir() {
     
-    //Initialise counters
-    millis = millis() - last;
-    seconds = round(millis/1000);
-
-    //Move last value down the array
-    secondArray[1] = secondArray[0];
-    secondArray[0] = seconds;
-
-    //Determine whether a second has passed
-    if (secondArray[0] > secondArray[1]) {
-      secondPassed = true;
-    } else if (secondArray[0] <= secondArray [1]) {
-      secondPassed = false;
-    }
+//    //Initialise counters
+//    millis = millis() - last;
+//    seconds = round(millis/1000);
+//
+//    //Move last value down the array
+//    secondArray[1] = secondArray[0];
+//    secondArray[0] = seconds;
+//
+//    //Determine whether a second has passed
+//    if (secondArray[0] > secondArray[1]) {
+//      secondPassed = true;
+//    } else if (secondArray[0] <= secondArray [1]) {
+//      secondPassed = false;
+//    }
 
     //Random movement variables
     float incX = random(-size*5, size*5);
@@ -127,10 +127,10 @@ class Cir {
       ellipse(posX, posY, size*5, size*5);
     }
 
-    //Reset the counter
-    if (seconds == maxSize) {
-      last = millis();
-    }
+//    //Reset the counter
+//    if (seconds == maxSize) {
+//      last = millis();
+//    }
 
     //  println("DONE: " + DONE + " - Seconds: " + seconds + " - maxSize: " + maxSize + " - Size: " + size + " - Bright: " + bright + " - Saturation: " + Saturation + " - Key: " + pressedKey);
   }
@@ -149,5 +149,10 @@ class Cir {
     Saturation = round(map(BRIGHT, 0, 12, 0, 100));
     Brightness = round(map(BRIGHT, 0, 12, 0, 100));
   }
+  
+  void setSecondPassed(boolean second){
+    secondPassed = second;
+  }
+  
 }
 

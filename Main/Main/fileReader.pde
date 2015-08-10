@@ -9,6 +9,13 @@ class Singer {
   int k;
   int retPitch;
   int retDuration;
+  float millis;
+  //Timer variables
+  int last;
+  int seconds;
+  int[] secondArray = new int[2]; // place to compair seconds values
+  boolean secondPassed;
+  boolean NEXT;
 
   //Load CSV file
   Table table = loadTable("CSV.csv", "header");
@@ -20,14 +27,6 @@ class Singer {
     singerNo = iSingerNo;
   } 
 
-  //Used to reset the array if necessary
-  void arrayReset() {
-    for (k=0; k < rowNo/4; k++) {
-      pitch[k] = 0;
-      duration[k] = 0;
-    }
-  }
-
   //Count the number of elements in the CSV file for each singer
   void count() {
     for (TableRow row : table.rows ()) {
@@ -38,32 +37,62 @@ class Singer {
     }
   }
 
-  void printResult() {
-    for (int i=0; i < rowNo/4; i++) {
-      pit = pitch[i];
-      dur = duration[i];
-      print("\n Singer:" + singerNo + " Pitch:" + pit + " Duration:" + dur);
+  //Measure time passed and send new values from the arrays
+  void timer() {
+    if (z < duration.length) {
+      //Initialise counters
+      millis = millis() - last;
+      seconds = round(millis/1000);
+
+      //Move last value down the array
+      secondArray[1] = secondArray[0];
+      secondArray[0] = seconds;
+
+      //Determine whether a second has passed
+      if (secondArray[0] > secondArray[1]) {
+        secondPassed = true;
+      } else if (secondArray[0] <= secondArray [1]) {
+        secondPassed = false;
+      }
+
+      if (seconds == duration[z]) {//If the duration of the note has been reached, send new data
+        NEXT = true;
+        last = millis();
+        z++; // Increase array address
+      } else {
+        NEXT = false;
+      }
+    } else {
+      println("END OF FILE");
     }
   }
 
   //Returns the current value under 'Pitch' in the CSV file
   int getPitch() {
-    if (z < rowNo/4) {// 4 = number of singers at the moment
+    if (/*z < rowNo/4 && */NEXT == true) {// 4 = number of singers at the moment
       retPitch = pitch[z];
-      z++;
     }
-//    print("\n Singer " + singerNo + " PITCH: ", retPitch);
+    //     print("\n Singer " + singerNo + " PITCH: ", retPitch);
     return retPitch;
   }
 
   //Returns the current value under 'Duration' in the CSV file
   int getDuration() {
-    if (x < rowNo/4) {
-      retDuration = duration[x];
-      x++;
+    if (/*z < rowNo/4 &&*/ NEXT == true) {
+      retDuration = duration[z];
     }
-//    print(" DURATION: ", retDuration);
+    //      print(" DURATION: ", retDuration);
     return retDuration;
+  }
+
+  boolean getSecondPassed() {
+    return secondPassed;
+  }
+
+  void printInfo() {
+    if (NEXT == true) {
+      println("\n Singer " + singerNo + " PITCH: " + retPitch + " DURATION: " + retDuration);
+    }
   }
 }
 

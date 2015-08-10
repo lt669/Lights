@@ -77,11 +77,13 @@ void draw() {
     println("BG: ", BGCol);
   }
   backCount++;
-background(-1);
-  //Depending on which key is pressed, select an object
-    runCircleClass();
-    runSquigleClass();
+ // background(-1);
   
+  s1.timer();
+  
+  //Depending on which key is pressed, select an object
+  runCircleClass();
+  runSquigleClass();
 }
 
 void mousePressed() {
@@ -121,7 +123,7 @@ void keyPressed() {
   }
   pressed = true;
   println("Select", select);
-  println("Choice: ",choice);
+  println("Choice: ", choice);
 }
 
 
@@ -133,7 +135,7 @@ void pointsCalc() {
   if (pressed == true && choice == 4) {
     // nPoints = Character.digit(key, 10);
     nPoints = key;// squigleKey;
-    println("nPoints: ",nPoints);
+    println("nPoints: ", nPoints);
     // println("\nnPoints:",nPoints);
   } else if (pressed == false) {
     nPoints = 0;
@@ -151,36 +153,37 @@ void runCircleClass() {
   fill(360, 20);
   rect(random(canX), random(canY), canX/4, canY/4);
 
-  if (singer1.getNext() == true) {
-    singer1.setBright(s1.getPitch());
-    singer1.setSize(s1.getDuration());
-  }
+
+  singer1.setBright(s1.getPitch());
+  singer1.setSize(s1.getDuration());
+  singer1.setSecondPassed(s1.getSecondPassed());
   singer1.drawCir();
+  s1.printInfo();
 
-  if (singer2.getNext() == true) {
-    singer2.setBright(s2.getPitch());
-    singer2.setSize(s2.getDuration());
-  }
-  singer2.drawCir();
-
-  if (singer3.getNext() == true) {
-    singer3.setBright(s3.getPitch());
-    singer3.setSize(s3.getDuration());
-  }
-  singer3.drawCir();
-
-  if (singer4.getNext() == true) {
-    singer4.setBright(s4.getPitch());
-    singer4.setSize(s4.getDuration());
-  }
-  singer4.drawCir();
+  //  if (singer2.getNext() == true) {
+  //    singer2.setBright(s2.getPitch());
+  //    singer2.setSize(s2.getDuration());
+  //  }
+  //  singer2.drawCir();
+  //
+  //  if (singer3.getNext() == true) {
+  //    singer3.setBright(s3.getPitch());
+  //    singer3.setSize(s3.getDuration());
+  //  }
+  //  singer3.drawCir();
+  //
+  //  if (singer4.getNext() == true) {
+  //    singer4.setBright(s4.getPitch());
+  //    singer4.setSize(s4.getDuration());
+  //  }
+  //  singer4.drawCir();
 
   float imgX = random(-5, 5);
   float imgY = random(-5, 5);
 }
 
 void runSquigleClass() {
- // nPoints = key; // Character.digit(key, 10);
+  // nPoints = key; // Character.digit(key, 10);
   pointsCalc();
   //background(0);
 
