@@ -63,10 +63,10 @@ void setup() {
   singer4 = new Cir(canX*3/4, canY*3/4, 0, 0);
 
   //Squigle Objects
-  sq1 = new squigleClass(newX, newY, 10);
-  sq2 = new squigleClass(canX*3/4, canY*3/4, 5);
-  sq3 = new squigleClass(canX*3/4, canY/4, 10);
-  sq4 = new squigleClass(canX/4, canY*3/4, 30);
+  sq1 = new squigleClass(newX, newY);
+  sq2 = new squigleClass(canX*3/4, canY*3/4);
+  sq3 = new squigleClass(canX*3/4, canY/4);
+  sq4 = new squigleClass(canX/4, canY*3/4);
 }
 
 void draw() {
@@ -74,10 +74,10 @@ void draw() {
   if (backCount == 0) {
     colorMode(HSB, 360, 100, 100);
     background(360);
-    println("BG: ", BGCol);
+   // println("BG: ", BGCol);
   }
   backCount++;
- // background(-1);
+  background(-1);
   
   s1.timer();
   
@@ -186,14 +186,13 @@ void runSquigleClass() {
   // nPoints = key; // Character.digit(key, 10);
   pointsCalc();
   //background(0);
-
-  sq1.calcShape(nPoints);
+  sq1.calcShape(s1.getDuration());
   sq1.edgeCheck();
   sq1.drawShape();
 
-  sq2.calcShape(nPoints);
-  sq2.drawShape();
-  sq2.edgeCheck();
+//  sq2.calcShape(nPoints);
+//  sq2.drawShape();
+//  sq2.edgeCheck();
 
   //  sq3.calcShape(nPoints);
   //  sq3.drawShape();
