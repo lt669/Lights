@@ -74,13 +74,20 @@ void draw() {
   if (backCount == 0) {
     colorMode(HSB, 360, 100, 100);
     background(360);
-   // println("BG: ", BGCol);
+    // println("BG: ", BGCol);
   }
   backCount++;
-  background(-1);
-  
+
+  if (choice < 4) {
+    //Fades out parts of the screen
+    noStroke();
+    fill(360, 20);
+    rect(random(canX), random(canY), canX/4, canY/4);
+  } else {
+    background(-1);
+  }
   s1.timer();
-  
+
   //Depending on which key is pressed, select an object
   runCircleClass();
   runSquigleClass();
@@ -148,12 +155,6 @@ void runCircleClass() {
 
   // background(-1);
 
-  //Fades out parts of the screen
-  noStroke();
-  fill(360, 20);
-  rect(random(canX), random(canY), canX/4, canY/4);
-
-
   singer1.setBright(s1.getPitch());
   singer1.setSize(s1.getDuration());
   singer1.setSecondPassed(s1.getSecondPassed());
@@ -190,9 +191,9 @@ void runSquigleClass() {
   sq1.edgeCheck();
   sq1.drawShape();
 
-//  sq2.calcShape(nPoints);
-//  sq2.drawShape();
-//  sq2.edgeCheck();
+  //  sq2.calcShape(nPoints);
+  //  sq2.drawShape();
+  //  sq2.edgeCheck();
 
   //  sq3.calcShape(nPoints);
   //  sq3.drawShape();
