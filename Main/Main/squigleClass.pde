@@ -47,8 +47,8 @@ class squigleClass {
 
   void calcShape(int inputPoints) {
 
-    points = inputPoints;
-    
+    points = inputPoints*5;
+
     numberOfPoints[1] = numberOfPoints[0];
     numberOfPoints[0] = points;
     //After ever 10 counts, randomise movement
@@ -129,35 +129,45 @@ class squigleClass {
     println("LARGE");
     //Increase number of points in array
     //points += 1; 
-     println("Points: ",points);
+    println("Points: ", points);
     //If the last array used was the smaller one, copy data to new array
     if (smallerUsed == true) {
-      xArray = new float[points]; 
-      yArray = new float[points]; 
+      xArray = new float[points +1]; 
+      yArray = new float[points +1]; 
       //Copy data from smaller array into new larger ones
       arrayCopy(newXArray, 0, xArray, 0, numberOfPoints[1]); 
       arrayCopy(newYArray, 0, yArray, 0, numberOfPoints[1]);
+
+      //If a load of new points have been added, make them equal to the last point with a value thats not 0
+      for (int i=numberOfPoints[1]; i<points; i++) {
+        xArray[i] = xArray[numberOfPoints[1]-1];
+        yArray[i] = yArray[numberOfPoints[1]-1];
+      }
+    } else {
+
+      //Create two buffer arrays used to temporarly store data
+      float[] bufferXArray = new float[numberOfPoints[1]]; //Size of the previous number of points
+      float[] bufferYArray = new float[numberOfPoints[1]]; 
+      //Copy the 'newArray' to a 'bufferArray'
+      for (int i=0; i<numberOfPoints[1]; i++) {
+        bufferXArray[i] = xArray[i]; 
+        bufferYArray[i] = yArray[i];
+      }
+      //Format 'newArray' with less elements
+      xArray = new float[points +1]; 
+      yArray = new float[points +1]; 
+
+      //Copy old data into the formatted array but with 1 less element
+      arrayCopy(bufferXArray, 0, xArray, 0, numberOfPoints[1]); 
+      arrayCopy(bufferYArray, 0, yArray, 0, numberOfPoints[1]);
+
+      //If a load of new points have been added, make them equal to the last point with a value thats not 0
+      for (int i=numberOfPoints[1]; i<points; i++) {
+        xArray[i] = xArray[numberOfPoints[1]];
+        yArray[i] = yArray[numberOfPoints[1]];
+      }
     }
 
-    //Create two buffer arrays used to temporarly store data
-    float[] bufferXArray = new float[numberOfPoints[1]]; //Size of the previous number of points
-    float[] bufferYArray = new float[numberOfPoints[1]]; 
-    //Copy the 'newArray' to a 'bufferArray'
-    for (int i=0; i<numberOfPoints[1]; i++) {
-      bufferXArray[i] = xArray[i]; 
-      bufferYArray[i] = yArray[i];
-    }
-    //Format 'newArray' with less elements
-    xArray = new float[points +1]; 
-    yArray = new float[points +1]; 
-
-    //Copy old data into the formatted array but with 1 less element
-    arrayCopy(bufferXArray, 0, xArray, 0, numberOfPoints[1]); 
-    arrayCopy(bufferYArray, 0, yArray, 0, numberOfPoints[1]);
-
-    //Add an element to the end of the 'Growing' array
-    //    xArray = append(xArray, 0); 
-    //    yArray = append(yArray, 0); 
 
     //Save the previous positions of the 'head' along the array
     for (int i = 0; i<points; i++) {
@@ -178,13 +188,7 @@ class squigleClass {
   //Function that shrinks the array and stores new values
   void smallerArray() {
     println("SMALL");
-         println("Points: ",points);
-    //Decrease number of points & ensure it doesnt go below 0
-    //    points -= 1; 
-    //    if (points <= 1) {
-    //      points = 1;
-    //    }
-
+    println("Points: ", points);
     //If last array used was the larger one copy old data to new array
     if (largerUsed == true) {
       //Create new arrays with new 'points value'
