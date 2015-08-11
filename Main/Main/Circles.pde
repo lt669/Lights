@@ -20,6 +20,8 @@ class Cir {
   float Saturation;
   float Brightness;
   
+  int movement = 3;
+  
   boolean w;
 
   //Constructor
@@ -31,25 +33,10 @@ class Cir {
   }
 
   void drawCir() {
-    
-//    //Initialise counters
-//    millis = millis() - last;
-//    seconds = round(millis/1000);
-//
-//    //Move last value down the array
-//    secondArray[1] = secondArray[0];
-//    secondArray[0] = seconds;
-//
-//    //Determine whether a second has passed
-//    if (secondArray[0] > secondArray[1]) {
-//      secondPassed = true;
-//    } else if (secondArray[0] <= secondArray [1]) {
-//      secondPassed = false;
-//    }
 
     //Random movement variables
-    float incX = random(-size*5, size*5);
-    float incY = random(-size*5, size*5);
+    float incX = random(-size*movement, size*movement);
+    float incY = random(-size*movement, size*movement);
 
     //Update position
     posX += incX;
@@ -111,13 +98,14 @@ class Cir {
 
       // stroke(bright,Saturation, Brightness);
       noStroke();
-      fill(bright, Saturation, Brightness, bright);
+      fill(bright, Saturation, Brightness, bright/2);
       ellipse(posX, posY, size*5, size*5);
 
     } else if (choice == 2) {
-      colorMode(RGB, 255, 255, 255);
-      stroke(bright, bright, bright,bright);
-      fill(0, 0, 0, bright);
+      colorMode(RGB, 100, 100, 100);
+      float invert = 100 - Brightness;
+      stroke(invert, invert, invert);
+      fill(Brightness, Saturation, Brightness, invert);
       ellipse(posX, posY, size*5, size*5);
     } else if (choice == 3){
       colorMode(HSB, 360, 100, 100);
@@ -126,11 +114,6 @@ class Cir {
       fill(0, 0, 100, 0); //Setting last value to 0 makes the circles centres transparent 
       ellipse(posX, posY, size*5, size*5);
     }
-
-//    //Reset the counter
-//    if (seconds == maxSize) {
-//      last = millis();
-//    }
 
     //  println("DONE: " + DONE + " - Seconds: " + seconds + " - maxSize: " + maxSize + " - Size: " + size + " - Bright: " + bright + " - Saturation: " + Saturation + " - Key: " + pressedKey);
   }

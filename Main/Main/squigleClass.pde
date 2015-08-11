@@ -142,9 +142,7 @@ class squigleClass {
           yArray[i] = yArray[numberOfPoints[1]];
         }
       }
-      printArray(xArray);
     } else {
-
       //Create two buffer arrays used to temporarly store data
       float[] bufferXArray = new float[numberOfPoints[1]]; //Size of the previous number of points
       float[] bufferYArray = new float[numberOfPoints[1]]; 
@@ -173,9 +171,6 @@ class squigleClass {
           yArray[i] = yArray[numberOfPoints[1]];
         }
       }
-      println("Added: ", (numberOfPoints[0] - numberOfPoints[1]));
-      println("xArray["+numberOfPoints[1]+"]: "+xArray[numberOfPoints[1]]);
-      printArray(xArray);
     }
 
 
@@ -263,8 +258,7 @@ class squigleClass {
 
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
-
-
+    
     if (choice == 4) {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);

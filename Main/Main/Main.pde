@@ -43,7 +43,7 @@ Singer s4;
 
 void setup() {
   size(canX, canY);
-
+  background(-1);
   //Initialise new objects
   s1 = new Singer(1);
   s2 = new Singer(2);
@@ -71,12 +71,16 @@ void setup() {
 
 void draw() {
 
-//  if (backCount == 0) {
-//    colorMode(HSB, 360, 100, 100);
-//    background(360);
-//    // println("BG: ", BGCol);
-//  }
-//  backCount++;
+  //  if (backCount == 0) {
+  //    colorMode(HSB, 360, 100, 100);
+  //    background(360);
+  //    // println("BG: ", BGCol);
+  //  }
+  //  backCount++;
+
+  if (pressed == true) {
+    background(-1);
+  }
 
   if (choice < 4 || choice == 6) {
     //Fades out parts of the screen
@@ -90,7 +94,6 @@ void draw() {
   s2.timer();
   s3.timer();
   s4.timer();
-  
 
   //Depending on which key is pressed, select an object
   runCircleClass();
@@ -117,11 +120,9 @@ void keyPressed() {
   println("Choice: ", choice);
 }
 
-
 void keyReleased() {
   pressed = false;
 }
-
 
 void runCircleClass() {
 
@@ -131,27 +132,25 @@ void runCircleClass() {
   singer1.setSize(s1.getDuration());
   singer1.setSecondPassed(s1.getSecondPassed());
   singer1.drawCir();
-//  s1.printInfo();
+  //  s1.printInfo();
 
-//  singer2.setBright(s2.getPitch());
-//  singer2.setSize(s2.getDuration());
-//  singer2.setSecondPassed(s2.getSecondPassed());
-//  singer2.drawCir();
-//
-//  singer3.setBright(s3.getPitch());
-//  singer3.setSize(s3.getDuration());
-//  singer3.setSecondPassed(s3.getSecondPassed());
-//  singer3.drawCir();
-//
-//  singer4.setBright(s4.getPitch());
-//  singer4.setSize(s4.getDuration());
-//  singer4.setSecondPassed(s4.getSecondPassed());
-//  singer4.drawCir();
+  singer2.setBright(s2.getPitch());
+  singer2.setSize(s2.getDuration());
+  singer2.setSecondPassed(s2.getSecondPassed());
+  singer2.drawCir();
 
+  singer3.setBright(s3.getPitch());
+  singer3.setSize(s3.getDuration());
+  singer3.setSecondPassed(s3.getSecondPassed());
+  singer3.drawCir();
 
+  singer4.setBright(s4.getPitch());
+  singer4.setSize(s4.getDuration());
+  singer4.setSecondPassed(s4.getSecondPassed());
+  singer4.drawCir();
 
-  float imgX = random(-5, 5);
-  float imgY = random(-5, 5);
+//  float imgX = random(-5, 5);
+//  float imgY = random(-5, 5);
 }
 
 void runSquigleClass() {
@@ -160,16 +159,16 @@ void runSquigleClass() {
   sq1.edgeCheck();
   sq1.drawShape();
 
-//  sq2.calcShape(s2.getDuration());
-//  sq2.drawShape();
-//  sq2.edgeCheck();
-//
-//  sq3.calcShape(s3.getDuration());
-//  sq3.drawShape();
-//  sq3.edgeCheck();
-//
-//  sq4.calcShape(s4.getDuration());
-//  sq4.drawShape();
-//  sq4.edgeCheck();
+  sq2.calcShape(s2.getDuration());
+  sq2.drawShape();
+  sq2.edgeCheck();
+
+  sq3.calcShape(s3.getDuration());
+  sq3.drawShape();
+  sq3.edgeCheck();
+
+  sq4.calcShape(s4.getDuration());
+  sq4.drawShape();
+  sq4.edgeCheck();
 }
 
