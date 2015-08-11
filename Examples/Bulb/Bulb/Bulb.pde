@@ -7,6 +7,7 @@ int i = 0;
 int canX = 900;
 int canY = 600;
 boolean glow;
+
 void setup() {
   size(canX, canY, P3D);
 
@@ -38,7 +39,9 @@ if(glow == true){
     rect(0,0,canX,canY);
     
   } 
-  image(img, x, y, 2448*pos, 3264*pos);
+  //translate(x,y);
+  rotate(HALF_PI);
+  image(img, 0, 0, 2448*pos, 3264*pos);
 }
 
 void mousePressed(){
