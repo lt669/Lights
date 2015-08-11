@@ -47,11 +47,10 @@ class squigleClass {
 
   void calcShape(int inputPoints) {
 
-    points = inputPoints*5;
-
+    points = inputPoints*5; //Make the chain longer
     numberOfPoints[1] = numberOfPoints[0];
     numberOfPoints[0] = points;
-    //After ever 10 counts, randomise movement
+    //After ever 100 counts, randomise movement
     if (count == 1) {
       //Each object is given a random direction
       randMove = round(random(0, 3));
@@ -69,28 +68,25 @@ class squigleClass {
       yDirection += sin(TWO_PI*count/10)*p;
     } else if (check == 1) {
 
-      //Assign random variable
-      move = randMove;
-
-      if (move ==0) {
+      if (randMove ==0) {
         float p = random(-5, 5);
         //      xDirection += sin(TWO_PI*count/10)*count + p;
         //      yDirection += 2;
         xDirection += cos((TWO_PI/divide)*count/10)*curve; 
         yDirection += sin((TWO_PI/divide)*count/10)*curve;
-      } else if (move ==1) {
+      } else if (randMove ==1) {
         float p = random(-5, 5);
         //      xDirection += sin(TWO_PI*count/10)*count + p;
         //      yDirection -= 2;  
         xDirection -= cos((TWO_PI/divide)*count/10)*curve; 
         yDirection += sin((TWO_PI/divide)*count/10)*curve;
-      } else if (move ==2) {
+      } else if (randMove ==2) {
         float p = random(-5, 5);
         //      xDirection += 2;
         //      yDirection += sin(TWO_PI*count/10)*count + p;
         xDirection += cos((TWO_PI/divide)*count/10)*curve; 
         yDirection -= sin((TWO_PI/divide)*count/10)*curve;
-      } else if (move ==3) {
+      } else if (randMove ==3) {
         float p = random(-5, 5);
         //      xDirection -= 2;
         //      yDirection += sin(TWO_PI*count/10)*count + p;
@@ -114,7 +110,6 @@ class squigleClass {
       }
     }
 
-
     //Restart counter after 10
     if (count == 100) {
       count = 1;
@@ -128,8 +123,7 @@ class squigleClass {
 
     println("LARGE");
     //Increase number of points in array
-    //points += 1; 
-    println("Points: ", points);
+
     //If the last array used was the smaller one, copy data to new array
     if (smallerUsed == true) {
       xArray = new float[points +1]; 
@@ -140,19 +134,27 @@ class squigleClass {
 
       //If a load of new points have been added, make them equal to the last point with a value thats not 0
       for (int i=numberOfPoints[1]; i<points; i++) {
-        xArray[i] = xArray[numberOfPoints[1]-1];
-        yArray[i] = yArray[numberOfPoints[1]-1];
+        if (numberOfPoints[1]>0) {
+          xArray[i] = xArray[(numberOfPoints[1]-1)];
+          yArray[i] = yArray[(numberOfPoints[1]-1)];
+        } else {
+          xArray[i] = xArray[numberOfPoints[1]];
+          yArray[i] = yArray[numberOfPoints[1]];
+        }
       }
+      printArray(xArray);
     } else {
 
       //Create two buffer arrays used to temporarly store data
       float[] bufferXArray = new float[numberOfPoints[1]]; //Size of the previous number of points
       float[] bufferYArray = new float[numberOfPoints[1]]; 
+
       //Copy the 'newArray' to a 'bufferArray'
       for (int i=0; i<numberOfPoints[1]; i++) {
         bufferXArray[i] = xArray[i]; 
         bufferYArray[i] = yArray[i];
       }
+
       //Format 'newArray' with less elements
       xArray = new float[points +1]; 
       yArray = new float[points +1]; 
@@ -163,9 +165,17 @@ class squigleClass {
 
       //If a load of new points have been added, make them equal to the last point with a value thats not 0
       for (int i=numberOfPoints[1]; i<points; i++) {
-        xArray[i] = xArray[numberOfPoints[1]];
-        yArray[i] = yArray[numberOfPoints[1]];
+        if (numberOfPoints[1] > 0) {
+          xArray[i] = xArray[(numberOfPoints[1]-1)];
+          yArray[i] = yArray[(numberOfPoints[1]-1)];
+        } else {
+          xArray[i] = xArray[numberOfPoints[1]];
+          yArray[i] = yArray[numberOfPoints[1]];
+        }
       }
+      println("Added: ", (numberOfPoints[0] - numberOfPoints[1]));
+      println("xArray["+numberOfPoints[1]+"]: "+xArray[numberOfPoints[1]]);
+      printArray(xArray);
     }
 
 
@@ -181,8 +191,6 @@ class squigleClass {
     //State which array was last used
     largerUsed = true; 
     smallerUsed = false;
-
-    printArray(xArray);
   }
 
   //Function that shrinks the array and stores new values
@@ -229,8 +237,6 @@ class squigleClass {
     //State which array was last used
     smallerUsed = true; 
     largerUsed = false;
-
-    printArray(newXArray);
   }
 
   //Function that updates the array ones it has grown
@@ -263,9 +269,9 @@ class squigleClass {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);
       colorMode(HSB, 360);
-      stroke(xDirection, yDirection, 100); 
+      stroke(xDirection, yDirection, 100);
       strokeWeight(2);
-      fill(xDirection, yDirection, 100);
+      // fill(xDirection, yDirection, 100);
       beginShape(); 
       if (largerUsed == true) {
         for (int i=0; i<xArray.length; i++) {

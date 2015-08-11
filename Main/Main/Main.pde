@@ -1,6 +1,6 @@
 //Shared Variables
-int canX = 900;
-int canY = 1000;
+int canX = 1200;
+int canY = 600;
 boolean first, second;
 int backCount = 0;
 int BGCol;
@@ -71,14 +71,14 @@ void setup() {
 
 void draw() {
 
-  if (backCount == 0) {
-    colorMode(HSB, 360, 100, 100);
-    background(360);
-    // println("BG: ", BGCol);
-  }
-  backCount++;
+//  if (backCount == 0) {
+//    colorMode(HSB, 360, 100, 100);
+//    background(360);
+//    // println("BG: ", BGCol);
+//  }
+//  backCount++;
 
-  if (choice < 4) {
+  if (choice < 4 || choice == 6) {
     //Fades out parts of the screen
     noStroke();
     fill(360, 20);
@@ -87,6 +87,10 @@ void draw() {
     background(-1);
   }
   s1.timer();
+  s2.timer();
+  s3.timer();
+  s4.timer();
+  
 
   //Depending on which key is pressed, select an object
   runCircleClass();
@@ -100,26 +104,6 @@ void mousePressed() {
 void mouseReleased() {
   check = 0;
 }
-
-//void keyPressed() {  
-//
-//  choice = Character.digit(key, 10);
-//  pressed = true;
-//
-//  if (choice == 1 || (choice == -1 && first == true)) {
-//    backCount = 0;
-//    first = true; 
-//    second = false;
-//    BGCol = 360;
-//    circleKey = key;
-//  } else if (choice == 2 || (choice == -1 && second == true)) {
-//    backCount = 0;
-//    BGCol = 360;
-//    second = true; 
-//    first = false;
-//    squigleKey = key;
-//  }
-//}
 
 void keyPressed() {
   int select = Character.digit(key, 10);
@@ -138,18 +122,6 @@ void keyReleased() {
   pressed = false;
 }
 
-void pointsCalc() {
-  if (pressed == true && choice == 4) {
-    // nPoints = Character.digit(key, 10);
-    nPoints = key;// squigleKey;
-    println("nPoints: ", nPoints);
-    // println("\nnPoints:",nPoints);
-  } else if (pressed == false) {
-    nPoints = 0;
-  } else {
-    nPoints = nPoints;
-  }
-}
 
 void runCircleClass() {
 
@@ -159,49 +131,45 @@ void runCircleClass() {
   singer1.setSize(s1.getDuration());
   singer1.setSecondPassed(s1.getSecondPassed());
   singer1.drawCir();
-  s1.printInfo();
+//  s1.printInfo();
 
-  //  if (singer2.getNext() == true) {
-  //    singer2.setBright(s2.getPitch());
-  //    singer2.setSize(s2.getDuration());
-  //  }
-  //  singer2.drawCir();
-  //
-  //  if (singer3.getNext() == true) {
-  //    singer3.setBright(s3.getPitch());
-  //    singer3.setSize(s3.getDuration());
-  //  }
-  //  singer3.drawCir();
-  //
-  //  if (singer4.getNext() == true) {
-  //    singer4.setBright(s4.getPitch());
-  //    singer4.setSize(s4.getDuration());
-  //  }
-  //  singer4.drawCir();
+//  singer2.setBright(s2.getPitch());
+//  singer2.setSize(s2.getDuration());
+//  singer2.setSecondPassed(s2.getSecondPassed());
+//  singer2.drawCir();
+//
+//  singer3.setBright(s3.getPitch());
+//  singer3.setSize(s3.getDuration());
+//  singer3.setSecondPassed(s3.getSecondPassed());
+//  singer3.drawCir();
+//
+//  singer4.setBright(s4.getPitch());
+//  singer4.setSize(s4.getDuration());
+//  singer4.setSecondPassed(s4.getSecondPassed());
+//  singer4.drawCir();
+
+
 
   float imgX = random(-5, 5);
   float imgY = random(-5, 5);
 }
 
 void runSquigleClass() {
-  // nPoints = key; // Character.digit(key, 10);
-  pointsCalc();
-  //background(0);
+
   sq1.calcShape(s1.getDuration());
   sq1.edgeCheck();
   sq1.drawShape();
 
-  //  sq2.calcShape(nPoints);
-  //  sq2.drawShape();
-  //  sq2.edgeCheck();
-
-  //  sq3.calcShape(nPoints);
-  //  sq3.drawShape();
-  //  sq3.edgeCheck();
-  //
-  //  sq4.calcShape(nPoints);
-  //  sq4.drawShape();
-  //  sq4.edgeCheck();
-  //  println("nPoints: ", nPoints);
+//  sq2.calcShape(s2.getDuration());
+//  sq2.drawShape();
+//  sq2.edgeCheck();
+//
+//  sq3.calcShape(s3.getDuration());
+//  sq3.drawShape();
+//  sq3.edgeCheck();
+//
+//  sq4.calcShape(s4.getDuration());
+//  sq4.drawShape();
+//  sq4.edgeCheck();
 }
 

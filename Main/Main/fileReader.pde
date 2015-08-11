@@ -39,7 +39,7 @@ class Singer {
 
   //Measure time passed and send new values from the arrays
   void timer() {
-    if (z < duration.length) {
+    if (z < duration.length - 1) {
       //Initialise counters
       millis = millis() - last;
       seconds = round(millis/1000);
