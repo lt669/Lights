@@ -87,6 +87,10 @@ void draw() {
     noStroke();
     fill(360, 20);
     rect(random(canX), random(canY), canX/4, canY/4);
+  } else if (choice == 7){
+    noStroke();
+    fill(360, 5);
+    rect(0, 0, canX, canY);
   } else {
     background(-1);
   }

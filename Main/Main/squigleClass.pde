@@ -46,7 +46,7 @@ class squigleClass {
   }
 
   void calcShape(int inputPoints) {
-
+    println("inputPoints: ",inputPoints);
     points = inputPoints*5; //Make the chain longer
     numberOfPoints[1] = numberOfPoints[0];
     numberOfPoints[0] = points;
@@ -281,9 +281,6 @@ class squigleClass {
         }
       }
       endShape();
-      m = true;
-      n = false;
-      b = false;
     } else if (choice == 5) {
       //    map(xDirection, 0, canX, 0 ,360);
       //    map(yDirection, 0, canX, 0, 360);
@@ -305,9 +302,6 @@ class squigleClass {
         }
       }
       endShape();
-      m = false;
-      n = true;
-      b = false;
     } else if (choice == 6) {
       backCount = 0;
       BGCol = 360;
@@ -332,9 +326,30 @@ class squigleClass {
         }
       }
       endShape();
-      m = false;
-      n = false;
-      b = true;
+    }else if (choice == 7) {
+      backCount = 0;
+      BGCol = 360;
+      int xColour = round(map(xDirection, 0, canX, 0, 360));
+      //yColor = map(yDirection, 0, canY, 0, 360);
+      colorMode(HSB, 360);
+      stroke(xColour, xColour, 100); 
+      strokeWeight(2);
+       fill(xColour,100,100);
+      beginShape(); 
+      if (largerUsed == true) {
+        for (int i=0; i<xArray.length; i++) {
+          curveVertex(xArray[i], yArray[i]);
+        }
+      } else if (smallerUsed == true) {
+        for (int x=0; x<newXArray.length; x++) {
+          curveVertex(newXArray[x], newYArray[x]);
+        }
+      } else {
+        for (int i=0; i<xArray.length; i++) {
+          curveVertex(xArray[i], yArray[i]);
+        }
+      }
+      endShape();
     }
   }
 
