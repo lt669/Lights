@@ -85,6 +85,7 @@ void draw() {
   if (choice < 4 || choice == 6) {
     //Fades out parts of the screen
     noStroke();
+    colorMode(HSB,360,100,100);
     fill(360, 20);
     rect(random(canX), random(canY), canX/4, canY/4);
   } else if (choice == 7){

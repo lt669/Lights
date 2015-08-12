@@ -20,7 +20,7 @@ class Cir {
   float Saturation;
   float Brightness;
   
-  int movement = 3;
+  int movement = 1;
   
   boolean w;
 
@@ -100,17 +100,25 @@ class Cir {
       noStroke();
       fill(bright, Saturation, Brightness, bright/2);
       ellipse(posX, posY, size*5, size*5);
-
     } else if (choice == 2) {
-      colorMode(RGB, 100, 100, 100);
+      
+      colorMode(HSB, 360, 100, 100);
       float invert = 100 - Brightness;
-      stroke(invert, invert, invert);
-      fill(Brightness, Saturation, Brightness, invert);
+      stroke(0, 0, bright);
+      fill(0, bright, bright, invert);
       ellipse(posX, posY, size*5, size*5);
+   
+//      bright = round(map(bright, 0, 360, 0, 255));
+//      println("bight: ",bright);
+//      colorMode(RGB,255,255,255);
+//      stroke(bright, bright, bright);
+//     // stroke((255 - bright),(255 - bright), (255 - bright), (255 - bright));
+//      fill(bright, 0, 0, bright);
+//      ellipse(posX, posY, size*5, size*5);
     } else if (choice == 3){
       colorMode(HSB, 360, 100, 100);
       map(bright, 0, 12, 0, 360);
-      stroke(bright, bright, bright,bright);
+      stroke(bright, Saturation, Brightness, bright);
       fill(0, 0, 100, 0); //Setting last value to 0 makes the circles centres transparent 
       ellipse(posX, posY, size*5, size*5);
     }
@@ -130,7 +138,7 @@ class Cir {
   //  bright = BRIGHT;
     bright = round(map(BRIGHT, 0, 12, 0, 360)); 
     Saturation = round(map(BRIGHT, 0, 12, 0, 100));
-    Brightness = round(map(BRIGHT, 0, 12, 0, 100));
+    Brightness = round(map(BRIGHT, 0, 12, 0, 70));
   }
   
   void setSecondPassed(boolean second){

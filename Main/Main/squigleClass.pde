@@ -55,7 +55,7 @@ class squigleClass {
       //Each object is given a random direction
       randMove = round(random(0, 3));
       divide = round(random(2, 16));
-      curve = round(random(2, 20));
+      curve = round(random(2, 10));
       randomDiameter =  round(random(10, 20));
       lowerD = randomDiameter - 2;
     }
@@ -173,7 +173,6 @@ class squigleClass {
       }
     }
 
-
     //Save the previous positions of the 'head' along the array
     for (int i = 0; i<points; i++) {
       xArray[points-i] = xArray[points-(i+1)];
@@ -258,7 +257,6 @@ class squigleClass {
 
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
-    
     if (choice == 4) {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);
@@ -334,7 +332,7 @@ class squigleClass {
       colorMode(HSB, 360);
       stroke(xColour, xColour, 100); 
       strokeWeight(2);
-       fill(xColour,100,100);
+      fill(xColour,100,100,50);
       beginShape(); 
       if (largerUsed == true) {
         for (int i=0; i<xArray.length; i++) {
