@@ -59,13 +59,30 @@ class Quad {
     //    println("\nStart Movement", movement);
     calcSize(); //Calculate the size of all the shapes
     chooseDirection(); // Calculate how the next shape will be drawn
+    println("movement: ", movement);
+    //Black marker where next starting point is
+    fill(0, 0, 0);
+    rect(shapesArray[e+1][xPosition], shapesArray[e+1][yPosition], 7, 5);
     calcPosition(); //Test to see whether the shape can be drawn in this direction
+    println("movement2: ", movement);
     //    print("\nreChoose: ", reChoose);
     if (reChoose == true) {
-      movement -= 1; //Draw in the same direction again
+      println("Rechoosing");
+      if(movement == 0){
+        movement += 2;
+      }else{
+      movement -= 2; //Draw in the same direction again
+      }
+      println("new Movment: ", movement);
       chooseDirection(); //Draw new shape in same as previous direction
     }
-    shapesArray[e+1][Choose] = movement-1;
+
+
+    //GREEN marker where next starting point is
+    fill(0, 255, 0);
+    rect(shapesArray[e+1][xPosition], shapesArray[e+1][yPosition], 5, 7);
+    //  shapesArray[e+1][Choose] = movement-1;
+
     if (shapesArray[e+1][Choose] == -1) {
       shapesArray[e+1][Choose] = 3;
     }
@@ -115,13 +132,12 @@ class Quad {
 
   void calcSize() {
     //Calculate new size of the previously drawn shapes
-    printArray();
     for (i=0; i<shapesArray.length - 1; i++) { 
       //Alter size in X direction
       if (shapesArray[i][sizeX] == 0) {
         //Do nothing, eventually delete the information from the array
       } else if (shapesArray[i][Choose] == left) {//This is due to the size of the shape being inverted
-        shapesArray[i][sizeX] += 1;
+        shapesArray[i][sizeX] -= 1; //Changed from '+' to '-'
       } else {
         shapesArray[i][sizeX] -= 1;
       }
@@ -129,15 +145,15 @@ class Quad {
       if (shapesArray[i][sizeY] == 0) {
         //Do nothing
       } else if (shapesArray[i][Choose] == up) {//This is due to the size of the shape being inverted
-        shapesArray[i][sizeY] += 1;
+        shapesArray[i][sizeY] -= 1; //Changed from '+' to '-'
       } else {
         shapesArray[i][sizeY] -= 1;
       }
     }
 
     //Random size varioables
-    xSize = round(random(20, 50));
-    ySize = round(random(20, 50));
+    xSize = round(random(20, 25));
+    ySize = round(random(20, 25));
 
     //Calculate size of the NEW shape
     shapesArray[e+1][sizeX] = xSize;
@@ -176,20 +192,27 @@ class Quad {
 
   void calcPosition() {
     reChoose = false;
-    //For the current shape,check whether any of the pixles withing the shape fall within the area of any of the other shapes
+
+//    for (i=0; i<shapesArray.length; i++) {
+//      println("x "+shapesArray[i][xPosition]+" -> "+(shapesArray[i][xPosition]+shapesArray[i][sizeX])+" y "+shapesArray[i][yPosition]);
+//    }
+
+    //For the current shape, check whether any of the pixles within the shape fall within the area of any of the other shapes
     for (int y = shapesArray[e+1][yPosition]; y< (shapesArray[e+1][yPosition]+shapesArray[e+1][sizeY]); y++) {
       for (int x = shapesArray[e+1][xPosition]; x< (shapesArray[e+1][xPosition]+shapesArray[e+1][sizeX]); x++) {
         for (int i=0; i<shapesArray.length - 1; i++) {  //Dont check against itself
-           if (x > shapesArray[i][xPosition] && x < shapesArray[i][xPosition] + shapesArray[i][sizeX] && y > shapesArray[i][yPosition] && y < shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
-          //if (shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] >= shapesArray[i][xPosition] && shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] <= shapesArray[i][xPosition] + shapesArray[i][sizeX] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
-            reChoose = true;
-            stroke(330,34,100);
-            fill(360,100,100);
-            rect(x,y,1,1);
+          //  for (int i=shapesArray.length-1; i > 0; i--) {  //Dont check against itself
+          if (x > shapesArray[i][xPosition] && x < shapesArray[i][xPosition] + shapesArray[i][sizeX] && y > shapesArray[i][yPosition] && y < shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
+            //   if (shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] >= shapesArray[i][xPosition] && shapesArray[e+1][xPosition] + shapesArray[e+1][sizeX] <= shapesArray[i][xPosition] + shapesArray[i][sizeX] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] >= shapesArray[i][yPosition] && shapesArray[e+1][yPosition] + shapesArray[e+1][sizeY] <= shapesArray[i][yPosition] + shapesArray[i][sizeY]) {
+            reChoose = true; //Choose a different direction
+            //Debugging rectangle
+            stroke(330, 34, 100);
+            fill(360, 100, 100);
+            rect(x, y, 1, 1);
             // println("X collision");
             //println("["+i+"/"+e+"]: "+ shapesArray[i][xPosition] +"," +shapesArray[i][yPosition] + "->" + (shapesArray[i][xPosition]+shapesArray[i][sizeX]) +"," + (shapesArray[i][yPosition]+shapesArray[i][sizeY]) + " - " + shapesArray[e][xPosition] + "," + shapesArray[e][yPosition] + "->" + (shapesArray[e][xPosition]+shapesArray[e][sizeX]) + "," + (shapesArray[e][yPosition]+shapesArray[e][sizeY]));
-         //  println("x: " + x + " y: " + y);
-        }
+            //  println("x: " + x + " y: " + y);
+          }
         }
       }
       //
@@ -218,6 +241,7 @@ class Quad {
 
 
   void Right() {
+    println("Drawing Right");
     if (movement == right) {
       shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e][sizeX];
       shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
@@ -228,36 +252,49 @@ class Quad {
   }
 
   void Down() {
-    shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
-    shapesArray[e+1][yPosition] = shapesArray[e][yPosition] + shapesArray[e][sizeY];
+    println("Drawing Down");
+    if (shapesArray[e][Choose] == 1) {
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition] - shapesArray[e+1][sizeX] ;
+      shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
+    } else {    
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
+      shapesArray[e+1][yPosition] = shapesArray[e][yPosition] + shapesArray[e][sizeY];
+    }
   }
 
   void Left() {
     //If the previous movement was also left
-    if (shapesArray[e][Choose] == 2) {
-      shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e+1][sizeX] ;
+    //    if (shapesArray[e][Choose] == 2)
+    if (movement == 2) {
+      println("Drawing Left");
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition] - shapesArray[e+1][sizeX] ;
       shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
+      //Draw ANOTHER
+      fill(0);
+      ellipse(shapesArray[e+1][xPosition], shapesArray[e+1][yPosition], 5, 5);
     }
-    shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
-    shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
-    //    shapesArray[e+1][sizeX] = -(shapesArray[e][sizeX]); //THIS MAY NOT BE CORRECT
-    //    shapesArray[e+1][sizeY] = -(shapesArray[e][sizeY]);
-
-    shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX] - (shapesArray[e+1][sizeX])*2;
-    shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY];// - (shapesArray[e+1][sizeY])*2;
+    //    shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
+    //    shapesArray[e+1][yPosition] = shapesArray[e][yPosition];
+    //    //    shapesArray[e+1][sizeX] = -(shapesArray[e][sizeX]); //THIS MAY NOT BE CORRECT
+    //    //    shapesArray[e+1][sizeY] = -(shapesArray[e][sizeY]);
+    //
+    //    shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX] - (shapesArray[e+1][sizeX])*2;
+    //    shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY];// - (shapesArray[e+1][sizeY])*2;
   }
 
   void Up() {
+    println("Drawing Up");
     if (shapesArray[e][Choose] == up) {
-    shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
-    shapesArray[e+1][yPosition] = shapesArray[e][yPosition] + shapesArray[e][sizeY];
-    shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
-    shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
+      shapesArray[e+1][yPosition] = shapesArray[e][yPosition] + shapesArray[e][sizeY];
+//      shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
+//      shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
+    } else {
+      shapesArray[e+1][xPosition] = shapesArray[e][xPosition];
+      shapesArray[e+1][yPosition] = shapesArray[e][yPosition] - shapesArray[e+1][sizeY] ;// + shapesArray[e][sizeY]; // THIS SIGN MIGHT NEED CHANGING
+//      shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
+//      shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
     }
-    shapesArray[e+1][xPosition] = shapesArray[e][xPosition] + shapesArray[e][sizeX];
-    shapesArray[e+1][yPosition] = shapesArray[e][yPosition];// + shapesArray[e][sizeY]; // THIS SIGN MIGHT NEED CHANGING
-    shapesArray[e+1][sizeX] = shapesArray[e+1][sizeX];// - (shapesArray[e+1][sizeX])*2;
-    shapesArray[e+1][sizeY] = shapesArray[e+1][sizeY] - (shapesArray[e+1][sizeY])*2;
   }
 }
 

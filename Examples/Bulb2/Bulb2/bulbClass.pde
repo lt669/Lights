@@ -24,9 +24,10 @@ class bulbClass {
   float a;
   float angle = HALF_PI/4;
   float v;
-  int armLength;
+  float armLength;
+  float NewarmLength;
   float m; //Mass
-
+  float damp = 0.995; //Damping factor
   float l = 50;
   float w = sqrt(g/l);
 
@@ -49,17 +50,24 @@ class bulbClass {
     //Dimensions 2448 x 3264
   }
 
-  void swing(int armLength) { 
-    this.armLength = armLength;     
+  void swing(float armLength) { 
+    //  this.armLength = armLength;   
+
+    armLength = NewarmLength;
+    
     m = map(armLength, 0, canY, 1, 10);
     //Calculate acceleration
     a = (g/m) * sin(angle);
 
     //Increment Velocity
     v += a;
+    
+    //Damp velocity
+    v *= damp;
 
     //Increment Angle
     angle += v;
+
 
     //Calculate Positions
     xPos = armLength * sin(angle) + centerX;
@@ -73,9 +81,9 @@ class bulbClass {
     trail[0][0] = xPos;
     trail[0][1] = yPos;
 
-    for (int i=0; i<trail.length; i++) {
-      println("["+i+"]: topX: "+trail[i][0]+" topY "+trail[i][1]);
-    }
+//    for (int i=0; i<trail.length; i++) {
+//      println("["+i+"]: topX: "+trail[i][0]+" topY "+trail[i][1]);
+//    }
   }
 
   void drawBulb() {
@@ -106,8 +114,8 @@ class bulbClass {
         noStroke();
         fill(255, 0, 0, flash);
         ellipse(topX, topY + 20, flashSize - (i*5), flashSize-(i*5));
-//        fill(0, 0, 0, 50);
-//        ellipse(topX, topY + 20, flashSize-20, flashSize-20);
+        //        fill(0, 0, 0, 50);
+        //        ellipse(topX, topY + 20, flashSize-20, flashSize-20);
         popMatrix();
       }
       flashSize += 20;
@@ -131,6 +139,12 @@ class bulbClass {
       ellipse(topX, topY, 200, 200);
       popMatrix();
     }
+  }
+  
+  void setArmLength(){
+    NewarmLength = random(2,canY-30);
+    xPos = mouseX;
+    print("A ",armLength);
   }
 
   //  void glow() {

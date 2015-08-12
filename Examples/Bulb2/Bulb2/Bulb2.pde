@@ -39,6 +39,9 @@ void mousePressed() {
 void mouseReleased() {
   glow = false;
   println("RELEASED");
+  bulb1.setArmLength();
+  bulb2.setArmLength();
+  bulb3.setArmLength();
 }
 
 
