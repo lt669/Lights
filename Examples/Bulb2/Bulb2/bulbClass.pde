@@ -20,15 +20,20 @@ class bulbClass {
 
 
   //Physics variables
-  float g = -0.001;
+  float g = -0.01;
   float a;
   float angle = HALF_PI/4;
   float v;
   int armLength;
-  int m; //Mass
+  float m; //Mass
 
   float l = 50;
   float w = sqrt(g/l);
+
+  int flash;
+  int flashSize;
+  int trailLength = 10;
+  float[] [] trail = new float[trailLength][2];
 
   //Constructor
   bulbClass(int iPosX, int iPosY) {
@@ -38,16 +43,15 @@ class bulbClass {
     centerY = iPosY;
 
     imageMode(CENTER);
-//    bulb = loadImage("/Users/Lewis/Developer/Lights_Project/Lights/Examples/Bulb/Bulb/Bulb_cutV2.png");
-      dataPath("images/Bulb_cutV2.png");
+    //    bulb = loadImage("/Users/Lewis/Developer/Lights_Project/Lights/Examples/Bulb/Bulb/Bulb_cutV2.png");
+    dataPath("images/Bulb_cutV2.png");
     bulb = loadImage(dataPath("images/Bulb_cutV2.png"));
     //Dimensions 2448 x 3264
   }
 
-  void swing(int armLength, int m) {
-   this.m = m; 
-   this.armLength = armLength;     
-    
+  void swing(int armLength) { 
+    this.armLength = armLength;     
+    m = map(armLength, 0, canY, 1, 10);
     //Calculate acceleration
     a = (g/m) * sin(angle);
 
@@ -61,38 +65,88 @@ class bulbClass {
     xPos = armLength * sin(angle) + centerX;
     yPos = armLength * cos(angle) + centerY;
 
+
+    for (int i=0; i< (trail.length-1); i++) {
+      trail[(trailLength-1)-i][0] = trail[(trailLength-1)-(i+1)][0];
+      trail[(trailLength-1)-i][1] = trail[(trailLength-1)-(i+1)][1];
+    }
+    trail[0][0] = xPos;
+    trail[0][1] = yPos;
+
+    for (int i=0; i<trail.length; i++) {
+      println("["+i+"]: topX: "+trail[i][0]+" topY "+trail[i][1]);
+    }
+  }
+
+  void drawBulb() {
+
     stroke(0);
     line(centerX, centerY, xPos, yPos);
-    
+
     pushMatrix();
     translate(xPos, yPos);
     rotate(-(angle));
     image(bulb, topX, topY, 2448*size, 3264*size);
     popMatrix();
-    println("xPos", xPos);
-
-
-    // image(bulb, xPos+topX, yPos+topY, 2448*size, 3264*size);
-
-    stroke(0);
-    fill(255, 0, 0);
-    rect(xPos, yPos, 5, 5);
   }
 
   void glow() {
-    if (glow == true) {
-      smooth();
+
+    if (glow == true) {  
+
+      for (int i=0; i<trail.length; i++) {
+        pushMatrix();
+        translate(trail[i][0], trail[i][1]);
+        rotate(-(angle));
+        //      //Black
+        //      noStroke();
+        //      fill(0, 0, 0, 255 - flash);
+        //      ellipse(topX, topY, 200, 200);
+        //White
+        noStroke();
+        fill(255, 0, 0, flash);
+        ellipse(topX, topY + 20, flashSize, flashSize);
+//        fill(0, 0, 0, 50);
+//        ellipse(topX, topY + 20, flashSize-20, flashSize-20);
+        popMatrix();
+      }
+      flashSize += 20;
+      if (flashSize >= 160) {
+        flashSize = 160;
+      }
+      flash+= 20;
+      if (flash >= 100) {
+        flash = 100;
+      }
+      drawBulb();
+    } else {
+      drawBulb();
+      flash = 0;
+      flashSize = 0;
+      pushMatrix();
+      translate(xPos, yPos);
+      rotate(-(angle));
       noStroke();
-      fill(255, 50, 0);
-      ellipse(xPos+topX, yPos+offSet+topY, 120, 120);
-      filter( BLUR, 3 );
-    }
-    if (glow == false) {
-      noStroke();
-      rectMode(CORNER);
-      fill(255, 255, 255, 5);
-      rect(0, 0, canX, canY);
+      fill(0, 0, 0, 150);
+      ellipse(topX, topY, 200, 200);
+      popMatrix();
     }
   }
+
+  //  void glow() {
+  //    if (glow == true) {
+  //      smooth();
+  //      noStroke();
+  //      fill(255, 50, 0);
+  //      ellipse(xPos+topX, yPos+offSet+topY, 120, 120);
+  //      filter( BLUR, 3 );
+  //    }
+  //    if (glow == false) {
+  //      noStroke();
+  //      rectMode(CORNER);
+  //      fill(255, 255, 255, 5);
+  //      rect(0, 0, canX, canY);
+  //    }
+  //  }
 }
 
