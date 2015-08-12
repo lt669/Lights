@@ -32,7 +32,7 @@ class bulbClass {
 
   int flash;
   int flashSize;
-  int trailLength = 10;
+  int trailLength = 30;
   float[] [] trail = new float[trailLength][2];
 
   //Constructor
@@ -105,7 +105,7 @@ class bulbClass {
         //White
         noStroke();
         fill(255, 0, 0, flash);
-        ellipse(topX, topY + 20, flashSize, flashSize);
+        ellipse(topX, topY + 20, flashSize - (i*5), flashSize-(i*5));
 //        fill(0, 0, 0, 50);
 //        ellipse(topX, topY + 20, flashSize-20, flashSize-20);
         popMatrix();
@@ -127,7 +127,7 @@ class bulbClass {
       translate(xPos, yPos);
       rotate(-(angle));
       noStroke();
-      fill(0, 0, 0, 150);
+      fill(0, 0, 0, 230);
       ellipse(topX, topY, 200, 200);
       popMatrix();
     }
