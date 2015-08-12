@@ -20,11 +20,12 @@ class bulbClass {
 
 
   //Physics variables
-  float g = -0.01;
+  float g = -0.001;
   float a;
-  float angle = HALF_PI/2;
+  float angle = HALF_PI/4;
   float v;
-  int armLength = 200;
+  int armLength;
+  int m; //Mass
 
   float l = 50;
   float w = sqrt(g/l);
@@ -37,14 +38,18 @@ class bulbClass {
     centerY = iPosY;
 
     imageMode(CENTER);
-    bulb = loadImage("/Users/Lewis/Developer/Lights_Project/Lights/Examples/Bulb/Bulb/Bulb_cutV2.png");
+//    bulb = loadImage("/Users/Lewis/Developer/Lights_Project/Lights/Examples/Bulb/Bulb/Bulb_cutV2.png");
+      dataPath("images/Bulb_cutV2.png");
+    bulb = loadImage(dataPath("images/Bulb_cutV2.png"));
     //Dimensions 2448 x 3264
   }
 
-  void swing() {
-
+  void swing(int armLength, int m) {
+   this.m = m; 
+   this.armLength = armLength;     
+    
     //Calculate acceleration
-    a = g * sin(angle);
+    a = (g/m) * sin(angle);
 
     //Increment Velocity
     v += a;
@@ -55,17 +60,6 @@ class bulbClass {
     //Calculate Positions
     xPos = armLength * sin(angle) + centerX;
     yPos = armLength * cos(angle) + centerY;
-
-    //    //Calculate X position
-    //    xMovement = (sin(theta))*swing*3;
-    //    yMovement = (cos(theta*2))*swing;
-    //    rotation = sin(theta)/2;
-    //    theta += 0.05;
-    //
-    //    xPos = xMovement + centerX;
-    //    yPos = yMovement + centerY;
-    //
-    //    xPos = sin(w);
 
     stroke(0);
     line(centerX, centerY, xPos, yPos);
