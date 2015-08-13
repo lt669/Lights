@@ -330,8 +330,9 @@ class squigleClass {
       int xColour = round(map(xDirection, 0, canX, 0, 360));
       //yColor = map(yDirection, 0, canY, 0, 360);
       colorMode(HSB, 360);
-      stroke(xColour, xColour, 100); 
-      strokeWeight(2);
+      noStroke();
+      //stroke(xColour, xColour, 100); 
+      //strokeWeight(2);
       fill(xColour,100,100,50);
       beginShape(); 
       if (largerUsed == true) {
