@@ -12,7 +12,7 @@ void setup() {
 
   //Seperate the lines using )
   for (int i=0; i<=text.length; i++) {
-    part1 = splitTokens(text[13], "NEWPART()");
+    part1 = splitTokens(text[13], "NEWPART() ");
     part2 = splitTokens(text[17], "NEWPART()");
     part3 = splitTokens(text[22], "NEWPART()");
     part4 = splitTokens(text[26], "NEWPART()");
@@ -28,7 +28,7 @@ void setup() {
   saveStrings("Part5.txt", part5);
   saveStrings("Part6.txt", part6);
 
-  //Add commas
+  //Split
   
   
 }
