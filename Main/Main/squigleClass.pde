@@ -257,13 +257,17 @@ class squigleClass {
 
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
+    if(colorBright == 1){
+      colorMode(HSB, 360);
+    } else if (colorBright == 2){
+      colorMode(HSB, 360, 100, 100);
+    }
+    println("colorBright ",colorBright);
     if (choice == 4) {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);
-      colorMode(HSB, 360);
       stroke(xDirection, yDirection, 100);
       strokeWeight(2);
-      // fill(xDirection, yDirection, 100);
       beginShape(); 
       if (largerUsed == true) {
         for (int i=0; i<xArray.length; i++) {
@@ -280,9 +284,6 @@ class squigleClass {
       }
       endShape();
     } else if (choice == 5) {
-      //    map(xDirection, 0, canX, 0 ,360);
-      //    map(yDirection, 0, canX, 0, 360);
-      colorMode(HSB, 360);
       stroke(xDirection, yDirection, 100); 
       strokeWeight(2);
       beginShape(TRIANGLES); 
@@ -302,10 +303,7 @@ class squigleClass {
       endShape();
     } else if (choice == 6) {
       backCount = 0;
-      BGCol = 360;
       int xColour = round(map(xDirection, 0, canX, 0, 360));
-      //yColor = map(yDirection, 0, canY, 0, 360);
-      colorMode(HSB, 360);
       stroke(xColour, xColour, 100); 
       strokeWeight(2);
       // fill(xDirection,yDirection,100);
@@ -326,10 +324,7 @@ class squigleClass {
       endShape();
     }else if (choice == 7) {
       backCount = 0;
-      BGCol = 360;
       int xColour = round(map(xDirection, 0, canX, 0, 360));
-      //yColor = map(yDirection, 0, canY, 0, 360);
-      colorMode(HSB, 360);
       noStroke();
       //stroke(xColour, xColour, 100); 
       //strokeWeight(2);

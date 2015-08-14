@@ -1,9 +1,12 @@
 //Shared Variables
-int canX = 1200;
+int canX = 1650;
 int canY = 600;
 boolean first, second;
 int backCount = 0;
-int BGCol;
+int BGhue = 0;
+int BGsat = 0;
+int BGbri = 100;
+int colorBright; //graphics brightness variable
 
 //Cicles Variables
 Table table;
@@ -43,7 +46,8 @@ Singer s4;
 
 void setup() {
   size(canX, canY);
-  background(-1);
+  colorMode(HSB,360,100,100);
+  background(0,0,100);
   //Initialise new objects
   s1 = new Singer(1);
   s2 = new Singer(2);
@@ -70,6 +74,7 @@ void setup() {
 }
 
 void draw() {
+  colorMode(HSB,360,100,100);
 
   //  if (backCount == 0) {
   //    colorMode(HSB, 360, 100, 100);
@@ -79,21 +84,20 @@ void draw() {
   //  backCount++;
 
   if (pressed == true) {
-    background(-1);
+    background(BGhue,BGsat,BGbri);
   }
-
+  
   if (choice < 4 || choice == 6) {
     //Fades out parts of the screen
     noStroke();
-    colorMode(HSB,360,100,100);
-    fill(360, 20);
+    fill(BGhue,BGsat,BGbri, 20);
     rect(random(canX), random(canY), canX/4, canY/4);
-  } else if (choice == 7){
+  } else if (choice == 7) {
     noStroke();
-    fill(360, 5);
+    fill(BGhue,BGsat,BGbri, 10);
     rect(0, 0, canX, canY);
   } else {
-    background(-1);
+    background(BGhue,BGsat,BGbri);
   }
   s1.timer();
   s2.timer();
@@ -119,10 +123,30 @@ void keyPressed() {
     choice++;
   } else if (select == 2) {
     choice--;
+  } else if (select == 3) { //Black BG, flat colours
+    BGhue = 0;
+    BGsat = 0;
+    BGbri = 0;
+    colorBright = 1;
+  } else if (select == 4) { //Black BG, bright colours
+    BGhue = 0;
+    BGsat = 0;
+    BGbri = 0;
+    colorBright = 2;
+  } else if (select == 5) { //White BG, flat colours
+    BGhue = 0;
+    BGsat = 0;
+    BGbri = 100;
+    colorBright = 1;
+  } else if (select == 6) { //White BG, bright colours
+    BGhue = 0;
+    BGsat = 0;
+    BGbri = 100;
+    colorBright = 2;
   }
-  pressed = true;
-  println("Select", select);
-  println("Choice: ", choice);
+pressed = true;
+println("Select", select);
+println("Choice: ", choice);
 }
 
 void keyReleased() {
@@ -154,8 +178,8 @@ void runCircleClass() {
   singer4.setSecondPassed(s4.getSecondPassed());
   singer4.drawCir();
 
-//  float imgX = random(-5, 5);
-//  float imgY = random(-5, 5);
+  //  float imgX = random(-5, 5);
+  //  float imgY = random(-5, 5);
 }
 
 void runSquigleClass() {

@@ -20,14 +20,14 @@ class bulbClass {
 
 
   //Physics variables
-  float g = -0.01;
+  float g = -0.005;
   float a;
   float angle = HALF_PI/4;
   float v;
   float armLength;
   float NewarmLength;
   float m; //Mass
-  float damp = 0.995; //Damping factor
+  float damp = 1; //Damping factor
   float l = 50;
   float w = sqrt(g/l);
 
@@ -88,7 +88,12 @@ class bulbClass {
 
   void drawBulb() {
 
+    if(glow == false){
     stroke(0);
+    } else if (glow == true){
+    stroke(255,255,255);
+  }
+  
     line(centerX, centerY, xPos, yPos);
 
     pushMatrix();
@@ -142,7 +147,7 @@ class bulbClass {
   }
   
   void setArmLength(){
-    NewarmLength = random(2,canY-30);
+    NewarmLength = random(0,canY - 200); //Must be set to appropriate number of pixles
     xPos = mouseX;
     print("A ",armLength);
   }

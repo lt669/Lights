@@ -91,7 +91,6 @@ class Cir {
     //  }
 
     if (choice == 1) {
-      
       colorMode(HSB, 360, 100, 100);
       
 //      println("bright: " + bright + " - Saturation: " + Saturation + " - Brightness: " + Brightness);
@@ -119,7 +118,7 @@ class Cir {
       colorMode(HSB, 360, 100, 100);
       map(bright, 0, 12, 0, 360);
       stroke(bright, Saturation, Brightness, bright);
-      fill(0, 0, 100, 0); //Setting last value to 0 makes the circles centres transparent 
+      fill(0, 0, BGbri, Saturation); //Setting last value to 0 makes the circles centres transparent 
       ellipse(posX, posY, size*5, size*5);
     }
 
