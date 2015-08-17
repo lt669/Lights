@@ -13,7 +13,7 @@ class Singer {
   //Timer variables
   int last;
   int seconds;
-  int[] secondArray = new int[2]; // place to compair seconds values
+  int[] secondArray = new int[2];
   boolean secondPassed;
   boolean NEXT;
 

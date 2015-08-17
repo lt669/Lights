@@ -21,6 +21,7 @@ class Cir {
   float Brightness;
   
   int movement = 1;
+  int sizeMultiplier = 5;
   
   boolean w;
 
@@ -98,14 +99,14 @@ class Cir {
       // stroke(bright,Saturation, Brightness);
       noStroke();
       fill(bright, Saturation, Brightness, bright/2);
-      ellipse(posX, posY, size*5, size*5);
+      ellipse(posX, posY, size*sizeMultiplier, size*sizeMultiplier);
     } else if (choice == 2) {
       
       colorMode(HSB, 360, 100, 100);
       float invert = 100 - Brightness;
       stroke(0, 0, bright);
       fill(0, bright, bright, invert);
-      ellipse(posX, posY, size*5, size*5);
+      ellipse(posX, posY, size*sizeMultiplier, size*sizeMultiplier);
    
 //      bright = round(map(bright, 0, 360, 0, 255));
 //      println("bight: ",bright);
@@ -119,7 +120,7 @@ class Cir {
       map(bright, 0, 12, 0, 360);
       stroke(bright, Saturation, Brightness, bright);
       fill(0, 0, BGbri, Saturation); //Setting last value to 0 makes the circles centres transparent 
-      ellipse(posX, posY, size*5, size*5);
+      ellipse(posX, posY, size*sizeMultiplier, size*sizeMultiplier);
     }
 
     //  println("DONE: " + DONE + " - Seconds: " + seconds + " - maxSize: " + maxSize + " - Size: " + size + " - Bright: " + bright + " - Saturation: " + Saturation + " - Key: " + pressedKey);
