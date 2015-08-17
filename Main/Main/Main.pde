@@ -70,6 +70,7 @@ void setup() {
   PART6.read();
   
   PART1.rangeCalc();
+  PART2.rangeCalc();
 
   //Initialise new objects
   //  s1 = new Singer(1);
@@ -128,13 +129,9 @@ void draw() {
   } else {
     background(BGhue, BGsat, BGbri);
   }
-  //  s1.timer();
-  //  s2.timer();
-  //  s3.timer();
-  //  s4.timer();
 
   PART1.timer();
-//  PART2.timer();
+  PART2.timer();
 //  PART3.timer();
 //  PART4.timer();
 //  PART5.timer();
@@ -198,12 +195,11 @@ void runCircleClass() {
   singer1.setSize(PART1.getDuration());
   singer1.setSecondPassed(PART1.getSecondPassed());
   singer1.drawCir();
-  //  s1.printInfo();
-
-//  singer2.setBright(PART2.getPitch());
-//  singer2.setSize(PART2.getDuration());
-//  singer2.setSecondPassed(PART2.getSecondPassed());
-//  singer2.drawCir();
+  
+  singer2.setBright(PART2.getPitch());
+  singer2.setSize(PART2.getDuration());
+  singer2.setSecondPassed(PART2.getSecondPassed());
+  singer2.drawCir();
 
 //  singer3.setBright(s3.getPitch());
 //  singer3.setSize(s3.getDuration());
@@ -225,9 +221,9 @@ void runSquigleClass() {
   sq1.edgeCheck();
   sq1.drawShape();
 
-//  sq2.calcShape(PART2.getDuration());
-//  sq2.drawShape();
-//  sq2.edgeCheck();
+  sq2.calcShape(PART2.getDuration());
+  sq2.drawShape();
+  sq2.edgeCheck();
 
 //  sq3.calcShape(s3.getDuration());
 //  sq3.drawShape();
