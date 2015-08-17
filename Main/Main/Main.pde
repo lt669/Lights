@@ -44,7 +44,36 @@ Singer s2;
 Singer s3;
 Singer s4;
 
+textFileReader PART1;
+textFileReader PART2;
+textFileReader PART3;
+textFileReader PART4;
+textFileReader PART5;
+textFileReader PART6;
+
 void setup() {
+  noLoop();
+  PART1 = new textFileReader("Part1.txt");
+  PART2 = new textFileReader("Part2.txt");
+  PART3 = new textFileReader("Part3.txt");
+  PART4 = new textFileReader("Part4.txt");
+  PART5 = new textFileReader("Part5.txt");
+  PART6 = new textFileReader("Part6.txt");
+  
+  
+  PART1.read();
+  PART1.printFile("Part1: ");
+  PART2.read();
+  PART2.printFile("Part2: ");
+  PART3.read();
+  PART3.printFile("Part3: ");
+  PART4.read();
+  PART4.printFile("Part4: ");
+  PART5.read();
+  PART5.printFile("Part5: ");
+  PART6.read();
+  PART6.printFile("Part6: ");
+  
   size(canX, canY);
   colorMode(HSB,360,100,100);
   background(0,0,100);
@@ -71,6 +100,9 @@ void setup() {
   sq2 = new squigleClass(canX*3/4, canY*3/4);
   sq3 = new squigleClass(canX*3/4, canY/4);
   sq4 = new squigleClass(canX/4, canY*3/4);
+  
+  
+  
 }
 
 void draw() {
