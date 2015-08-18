@@ -1,3 +1,5 @@
+import org.puredata.processing.PureData;
+
 //Shared Variables
 int canX = 1650;
 int canY = 600;
@@ -51,7 +53,14 @@ textFileReader PART4;
 textFileReader PART5;
 textFileReader PART6;
 
+PureData pd;
+
 void setup() {
+
+//  //Setup PD patch
+//  pd = new PureData(this, 44100, 0, 6); //6 outputs
+//  pd.openPatch("?");  
+//  pd.start();
 
   //Load .txt files to singer classes
   PART1 = new textFileReader("Part1.txt");
@@ -68,21 +77,10 @@ void setup() {
   PART4.read();
   PART5.read();
   PART6.read();
-  
+
+  //Calculate the Pitch and Duration range for scaling purposes
   PART1.rangeCalc();
   PART2.rangeCalc();
-
-  //Initialise new objects
-  //  s1 = new Singer(1);
-  //  s2 = new Singer(2);
-  //  s3 = new Singer(3);
-  //  s4 = new Singer(4);
-
-  //Count number of elements for each singer
-//  s1.count();
-//  s2.count();
-//  s3.count();
-//  s4.count();
 
   //Circle Objects
   singer1 = new Cir(canX/4, canY/4, 0, 0);
@@ -96,11 +94,24 @@ void setup() {
   sq3 = new squigleClass(canX*3/4, canY/4);
   sq4 = new squigleClass(canX/4, canY*3/4);
 
+  //Set the Pitch and Duration ranges in the appropriate classes
+  singer1.setRange(PART1.getMinPitch(), PART1.getMaxPitch(), PART1.getMinDuration(), PART1.getMaxDuration());
+  singer2.setRange(PART2.getMinPitch(), PART2.getMaxPitch(), PART2.getMinDuration(), PART2.getMaxDuration());
+  singer3.setRange(PART3.getMinPitch(), PART3.getMaxPitch(), PART3.getMinDuration(), PART3.getMaxDuration());
+  singer4.setRange(PART4.getMinPitch(), PART4.getMaxPitch(), PART4.getMinDuration(), PART4.getMaxDuration());
+ // singer5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
+  //singer6.setRange(PART6.getMinPitch(), PART6.getMaxPitch(), PART6.getMinDuration(), PART6.getMaxDuration());
+
+  sq1.setRange(PART1.getMinPitch(), PART1.getMaxPitch(), PART1.getMinDuration(), PART1.getMaxDuration());
+  sq2.setRange(PART2.getMinPitch(), PART2.getMaxPitch(), PART2.getMinDuration(), PART2.getMaxDuration());
+  sq3.setRange(PART3.getMinPitch(), PART3.getMaxPitch(), PART3.getMinDuration(), PART3.getMaxDuration());
+  sq4.setRange(PART4.getMinPitch(), PART4.getMaxPitch(), PART4.getMinDuration(), PART4.getMaxDuration());
+//  sq5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
+//  sq6.setRange(PART6.getMinPitch(), PART6.getMaxPitch(), PART6.getMinDuration(), PART6.getMaxDuration());
+
   size(canX, canY);
   colorMode(HSB, 360, 100, 100);
   background(0, 0, 100);
-  
-  //noLoop();
 }
 
 void draw() {
@@ -132,14 +143,17 @@ void draw() {
 
   PART1.timer();
   PART2.timer();
-//  PART3.timer();
-//  PART4.timer();
-//  PART5.timer();
-//  PART6.timer();
+  //  PART3.timer();
+  //  PART4.timer();
+  //  PART5.timer();
+  //  PART6.timer();
 
   //Depending on which key is pressed, select an object
   runCircleClass();
   runSquigleClass();
+
+  //Run PD function
+  //PD();
 }
 
 void mousePressed() {
@@ -179,8 +193,8 @@ void keyPressed() {
     colorBright = 2;
   }
   pressed = true;
-  println("Select", select);
-  println("Choice: ", choice);
+//  println("Select", select);
+//  println("Choice: ", choice);
 }
 
 void keyReleased() {
@@ -191,25 +205,25 @@ void runCircleClass() {
 
   // background(-1);
 
-  singer1.setBright(PART1.getPitch());
-  singer1.setSize(PART1.getDuration());
-  singer1.setSecondPassed(PART1.getSecondPassed());
-  singer1.drawCir();
-  
+//  singer1.setBright(PART1.getPitch());
+//  singer1.setSize(PART1.getDuration());
+//  singer1.setSecondPassed(PART1.getSecondPassed());
+//  singer1.drawCir();
+
   singer2.setBright(PART2.getPitch());
   singer2.setSize(PART2.getDuration());
   singer2.setSecondPassed(PART2.getSecondPassed());
   singer2.drawCir();
 
-//  singer3.setBright(s3.getPitch());
-//  singer3.setSize(s3.getDuration());
-//  singer3.setSecondPassed(s3.getSecondPassed());
-//  singer3.drawCir();
-//
-//  singer4.setBright(s4.getPitch());
-//  singer4.setSize(s4.getDuration());
-//  singer4.setSecondPassed(s4.getSecondPassed());
-//  singer4.drawCir();
+  //  singer3.setBright(s3.getPitch());
+  //  singer3.setSize(s3.getDuration());
+  //  singer3.setSecondPassed(s3.getSecondPassed());
+  //  singer3.drawCir();
+  //
+  //  singer4.setBright(s4.getPitch());
+  //  singer4.setSize(s4.getDuration());
+  //  singer4.setSecondPassed(s4.getSecondPassed());
+  //  singer4.drawCir();
 
   //  float imgX = random(-5, 5);
   //  float imgY = random(-5, 5);
@@ -225,12 +239,16 @@ void runSquigleClass() {
   sq2.drawShape();
   sq2.edgeCheck();
 
-//  sq3.calcShape(s3.getDuration());
-//  sq3.drawShape();
-//  sq3.edgeCheck();
-//
-//  sq4.calcShape(s4.getDuration());
-//  sq4.drawShape();
-//  sq4.edgeCheck();
+  //  sq3.calcShape(s3.getDuration());
+  //  sq3.drawShape();
+  //  sq3.edgeCheck();
+  //
+  //  sq4.calcShape(s4.getDuration());
+  //  sq4.drawShape();
+  //  sq4.edgeCheck();
 }
+
+//void PD() {
+//  pd.sendFloat("");
+//}
 

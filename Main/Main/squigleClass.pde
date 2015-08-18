@@ -22,6 +22,12 @@ class squigleClass {
   boolean n;
   boolean b;
 
+  //Set max and mins
+  int minPitch;
+  int maxPitch;
+  int minDuration;
+  int maxDuration;
+
   //Check whether the number of points received is greater or larger than the last value
   int[] numberOfPoints;
 
@@ -46,8 +52,8 @@ class squigleClass {
   }
 
   void calcShape(int inputPoints) {
-    println("inputPoints: ",inputPoints);
-    points = inputPoints*5; //Make the chain longer
+//    println("inputPoints: ", inputPoints);
+    points = round(map(inputPoints, minDuration, maxDuration, 0, 10)); //Make the chain longer
     numberOfPoints[1] = numberOfPoints[0];
     numberOfPoints[0] = points;
     //After ever 100 counts, randomise movement
@@ -120,8 +126,6 @@ class squigleClass {
 
   //Function that increases the size of the array and stores values
   void largerArray() {
-
-    println("LARGE");
     //Increase number of points in array
 
     //If the last array used was the smaller one, copy data to new array
@@ -189,8 +193,6 @@ class squigleClass {
 
   //Function that shrinks the array and stores new values
   void smallerArray() {
-    println("SMALL");
-    println("Points: ", points);
     //If last array used was the larger one copy old data to new array
     if (largerUsed == true) {
       //Create new arrays with new 'points value'
@@ -257,12 +259,12 @@ class squigleClass {
 
   //THIS ONES PRETTY SICK BRO with black background
   void drawShape() {
-    if(colorBright == 1){
+    if (colorBright == 1) {
       colorMode(HSB, 360);
-    } else if (colorBright == 2){
+    } else if (colorBright == 2) {
       colorMode(HSB, 360, 100, 100);
     }
-    println("colorBright ",colorBright);
+  //  println("colorBright ", colorBright);
     if (choice == 4) {
       //      map(xDirection, 0, canX, 0, 360);
       //      map(yDirection, 0, canX, 0, 360);
@@ -322,13 +324,13 @@ class squigleClass {
         }
       }
       endShape();
-    }else if (choice == 7) {
+    } else if (choice == 7) {
       backCount = 0;
       int xColour = round(map(xDirection, 0, canX, 0, 360));
       noStroke();
       //stroke(xColour, xColour, 100); 
       //strokeWeight(2);
-      fill(xColour,100,100,50);
+      fill(xColour, 100, 100, 50);
       beginShape(); 
       if (largerUsed == true) {
         for (int i=0; i<xArray.length; i++) {
@@ -356,21 +358,6 @@ class squigleClass {
     return yArray[0];
   }
 
-  //Receive number of points (duration)
-  // int setPoints(int setPOINTS){
-  //   pointsCheck[0] = setPOINTS;
-  //   points = pointsCheck[0];
-  //   if(pointsCheck[0] > pointsCheck[1]){
-  //    morePoints = 'p'; //Change this eventually
-  //   } else if (pointsCheck[0] < pointsCheck[1]){
-  //    morePoints = 'o'; 
-  //   }
-  //   
-  //   //Shift value of 'points' down the array
-  //   pointsCheck[1] = pointsCheck[0];
-  //   
-  // }
-
   void edgeCheck() {
     if (xDirection <= 0) {
       xDirection = 0;
@@ -382,6 +369,13 @@ class squigleClass {
     } else if (yDirection >= canY) {
       yDirection = canY;
     }
+  }
+
+  void setRange(int MinPitch, int MaxPitch, int MinDuration, int MaxDuration) {
+    minPitch = MinPitch;
+    maxPitch = MaxPitch;
+    minDuration = MinDuration;
+    maxDuration = MaxDuration;
   }
 }
 

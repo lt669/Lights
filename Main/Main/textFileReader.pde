@@ -44,8 +44,8 @@ class textFileReader {
   //Measure time passed and send new values from the arrays
   void timer() {
     if (z < text.length - 1) {
-      println("Length: ", text.length);
-      println("Millis: "+millis()+" Next Millis: " + singerInfo[0][z+1] + " SecondPasses: " + secondPassed);
+//      println("Length: ", text.length);
+//      println("Millis: "+millis()+" Next Millis: " + singerInfo[0][z+1] + " SecondPasses: " + secondPassed);
       //Initialise counters
       //      millis = millis() - last;
 
@@ -112,10 +112,26 @@ class textFileReader {
     }
   }
 
+  int getMinPitch(){
+   return minPitch; 
+  }
+  
+  int getMaxPitch(){
+    return maxPitch;
+  }
+  
+  int getMinDuration(){
+   return minDuration; 
+  }
+  
+  int getMaxDuration(){
+   return maxDuration; 
+  }
+
   //Returns the current value under 'Pitch' in the CSV file
   int getPitch() {    
     if (NEXT == true) {      
-      retPitch = int(map(singerInfo[1][z], minPitch, maxPitch, 0, 12));
+      retPitch = singerInfo[1][z];
     }
     return retPitch;
   }
@@ -123,8 +139,8 @@ class textFileReader {
   //Returns the current value under 'Duration' in the CSV file
   int getDuration() {
     if (NEXT == true) {
-      retDuration = int(map(singerInfo[2][z], minDuration, maxDuration, 0, 10));
-      println("retDuration: "+retDuration+" minDuration: " + minDuration + " maxDuration: "+maxDuration);
+      retDuration = singerInfo[2][z];
+//      println("retDuration: "+retDuration+" minDuration: " + minDuration + " maxDuration: "+maxDuration);
     }
     return retDuration;
   }
