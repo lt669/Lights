@@ -1,8 +1,15 @@
 import org.puredata.processing.PureData;
 
 //Shared Variables
-int canX = 1650;
-int canY = 600;
+
+//Office Screen
+//int canX = 1650;
+//int canY = 600;
+
+//Mac
+int canX = 600;
+int canY = 200;
+
 boolean first, second;
 int backCount = 0;
 int BGhue = 0;
@@ -58,8 +65,8 @@ PureData pd;
 void setup() {
 
   //Setup PD patch
-  pd = new PureData(this, 44100, 0, 6); //6 outputs
-  pd.openPatch("?");  
+  pd = new PureData(this, 44100, 0, 2); //6 outputs
+  pd.openPatch("/Users/Lewis/Developer/Lights_Project/Lights/Main/Main/patch.pd");  
   pd.start();
 
   //Load .txt files to singer classes
@@ -252,5 +259,6 @@ void PD() {
   pd.sendFloat("duration1", (float)PART1.getDuration());
   pd.sendFloat("startTimeNext1", (float)PART1.getNextStartTime());
   pd.sendFloat("frequency1", (float)PART1.getPitch());
+  println("YEPPPPP",PART1.getDuration());
 }
 

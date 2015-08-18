@@ -1,5 +1,5 @@
-#N canvas 1040 142 468 428 10;
-#N canvas 848 433 625 588 counter 1;
+#N canvas -2 496 413 162 10;
+#N canvas 7 344 590 392 counter 0;
 #X obj 272 240 inlet;
 #X obj 349 240 inlet;
 #X obj 196 123 metro;
@@ -12,7 +12,7 @@
 #X obj 120 229 / 1000;
 #X floatatom 120 255 5 0 0 0 - - -;
 #X obj 293 49 hradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144 -1
--1 0;
+-1 1;
 #X obj 196 260 expr if($f1 >= $f2 \, 0 \, 1) \; if($f1 >= $f3 \, 1
 \, 0) \;;
 #X obj 323 66 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -50,10 +50,11 @@
 #X connect 17 0 16 1;
 #X connect 18 0 2 1;
 #X connect 23 0 2 0;
-#X restore 23 200 pd counter;
-#X obj 23 154 r duration1;
-#X obj 80 174 r startTimeNext1;
-#N canvas 951 256 450 300 audio 1;
+#X connect 23 0 18 0;
+#X restore 23 80 pd counter;
+#X obj 23 34 r duration1;
+#X obj 80 54 r startTimeNext1;
+#N canvas 649 211 450 300 audio 0;
 #X obj 119 77 inlet;
 #X obj 168 50 r frequency1;
 #X obj 168 75 osc~;
@@ -64,13 +65,19 @@
 #X connect 2 0 3 1;
 #X connect 3 0 4 0;
 #X connect 3 0 4 1;
-#X restore 23 230 pd audio;
-#X obj 227 147 r duration1;
-#X obj 284 167 r startTimeNext1;
-#X floatatom 225 224 5 0 0 0 - - -;
-#X floatatom 286 226 5 0 0 0 - - -;
+#X restore 23 110 pd audio;
+#X obj 227 27 r duration1;
+#X obj 284 47 r startTimeNext1;
+#X floatatom 194 90 5 0 0 0 - - -;
+#X floatatom 284 69 5 0 0 0 - - -;
+#X obj 253 129 print $s1;
+#X msg 253 105 mmmmbitch;
+#X obj 214 64 int;
 #X connect 0 0 3 0;
 #X connect 1 0 0 0;
 #X connect 2 0 0 1;
-#X connect 4 0 6 0;
+#X connect 4 0 9 0;
+#X connect 4 0 10 0;
 #X connect 5 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 6 0;
