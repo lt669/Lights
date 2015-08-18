@@ -57,10 +57,10 @@ PureData pd;
 
 void setup() {
 
-  //  //Setup PD patch
-  //  pd = new PureData(this, 44100, 0, 6); //6 outputs
-  //  pd.openPatch("?");  
-  //  pd.start();
+  //Setup PD patch
+  pd = new PureData(this, 44100, 0, 6); //6 outputs
+  pd.openPatch("?");  
+  pd.start();
 
   //Load .txt files to singer classes
   PART1 = new textFileReader("Part1.txt");
@@ -250,7 +250,7 @@ void runSquigleClass() {
 
 void PD() {
   pd.sendFloat("duration1", (float)PART1.getDuration());
-  pd.sendFloat("startTimeNext1",(float)PART1.getNextStartTime());
+  pd.sendFloat("startTimeNext1", (float)PART1.getNextStartTime());
   pd.sendFloat("frequency1", (float)PART1.getPitch());
 }
 
