@@ -124,6 +124,10 @@ class textFileReader {
     }
     return retDuration;
   }
+  
+  int getNextStartTime(){
+   return singerInfo[0][z+1]; 
+  }
 
   boolean getSecondPassed() {
     return secondPassed;

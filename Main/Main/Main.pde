@@ -57,10 +57,10 @@ PureData pd;
 
 void setup() {
 
-//  //Setup PD patch
-//  pd = new PureData(this, 44100, 0, 6); //6 outputs
-//  pd.openPatch("?");  
-//  pd.start();
+  //  //Setup PD patch
+  //  pd = new PureData(this, 44100, 0, 6); //6 outputs
+  //  pd.openPatch("?");  
+  //  pd.start();
 
   //Load .txt files to singer classes
   PART1 = new textFileReader("Part1.txt");
@@ -99,15 +99,15 @@ void setup() {
   singer2.setRange(PART2.getMinPitch(), PART2.getMaxPitch(), PART2.getMinDuration(), PART2.getMaxDuration());
   singer3.setRange(PART3.getMinPitch(), PART3.getMaxPitch(), PART3.getMinDuration(), PART3.getMaxDuration());
   singer4.setRange(PART4.getMinPitch(), PART4.getMaxPitch(), PART4.getMinDuration(), PART4.getMaxDuration());
- // singer5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
+  // singer5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
   //singer6.setRange(PART6.getMinPitch(), PART6.getMaxPitch(), PART6.getMinDuration(), PART6.getMaxDuration());
 
   sq1.setRange(PART1.getMinPitch(), PART1.getMaxPitch(), PART1.getMinDuration(), PART1.getMaxDuration());
   sq2.setRange(PART2.getMinPitch(), PART2.getMaxPitch(), PART2.getMinDuration(), PART2.getMaxDuration());
   sq3.setRange(PART3.getMinPitch(), PART3.getMaxPitch(), PART3.getMinDuration(), PART3.getMaxDuration());
   sq4.setRange(PART4.getMinPitch(), PART4.getMaxPitch(), PART4.getMinDuration(), PART4.getMaxDuration());
-//  sq5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
-//  sq6.setRange(PART6.getMinPitch(), PART6.getMaxPitch(), PART6.getMinDuration(), PART6.getMaxDuration());
+  //  sq5.setRange(PART5.getMinPitch(), PART5.getMaxPitch(), PART5.getMinDuration(), PART5.getMaxDuration());
+  //  sq6.setRange(PART6.getMinPitch(), PART6.getMaxPitch(), PART6.getMinDuration(), PART6.getMaxDuration());
 
   size(canX, canY);
   colorMode(HSB, 360, 100, 100);
@@ -153,7 +153,7 @@ void draw() {
   runSquigleClass();
 
   //Run PD function
-  //PD();
+  PD();
 }
 
 void mousePressed() {
@@ -193,8 +193,8 @@ void keyPressed() {
     colorBright = 2;
   }
   pressed = true;
-//  println("Select", select);
-//  println("Choice: ", choice);
+  //  println("Select", select);
+  //  println("Choice: ", choice);
 }
 
 void keyReleased() {
@@ -205,10 +205,10 @@ void runCircleClass() {
 
   // background(-1);
 
-//  singer1.setBright(PART1.getPitch());
-//  singer1.setSize(PART1.getDuration());
-//  singer1.setSecondPassed(PART1.getSecondPassed());
-//  singer1.drawCir();
+  //  singer1.setBright(PART1.getPitch());
+  //  singer1.setSize(PART1.getDuration());
+  //  singer1.setSecondPassed(PART1.getSecondPassed());
+  //  singer1.drawCir();
 
   singer2.setBright(PART2.getPitch());
   singer2.setSize(PART2.getDuration());
@@ -235,9 +235,9 @@ void runSquigleClass() {
   sq1.edgeCheck();
   sq1.drawShape();
 
-//  sq2.calcShape(PART2.getDuration());
-//  sq2.drawShape();
-//  sq2.edgeCheck();
+  //  sq2.calcShape(PART2.getDuration());
+  //  sq2.drawShape();
+  //  sq2.edgeCheck();
 
   //  sq3.calcShape(s3.getDuration());
   //  sq3.drawShape();
@@ -249,6 +249,8 @@ void runSquigleClass() {
 }
 
 void PD() {
-  pd.sendFloat("");
+  pd.sendFloat("duration1", (float)PART1.getDuration());
+  pd.sendFloat("startTimeNext1",(float)PART1.getNextStartTime());
+  pd.sendFloat("frequency1", (float)PART1.getPitch());
 }
 
