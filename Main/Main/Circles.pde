@@ -81,7 +81,7 @@ class Cir {
       NEXT = false;
     }
 
-    println("DONE: "+DONE+ " size: "+size+" maxSize: "+maxSize);
+  //  println("DONE: "+DONE+ " size: "+size+" maxSize: "+maxSize);
     //Draw Line
     //  stroke(250,250,250);
     //  line(canX/2,canY/2,posX,posY);
@@ -146,7 +146,7 @@ class Cir {
 
   void setSize(int SIZE) {
     maxSize = int(map(SIZE, minDuration, maxDuration, 0, 10));
-//    println("SIZE: "+ SIZE + " minD: " + minDuration + " maxD: " + maxDuration + " maxSize: "+maxSize);
+    println("SIZE: "+ SIZE + " minD: " + minDuration + " maxD: " + maxDuration + " maxSize: "+maxSize);
   }
 
   void setBright(int BRIGHT) {

@@ -235,9 +235,9 @@ void runSquigleClass() {
   sq1.edgeCheck();
   sq1.drawShape();
 
-  sq2.calcShape(PART2.getDuration());
-  sq2.drawShape();
-  sq2.edgeCheck();
+//  sq2.calcShape(PART2.getDuration());
+//  sq2.drawShape();
+//  sq2.edgeCheck();
 
   //  sq3.calcShape(s3.getDuration());
   //  sq3.drawShape();
@@ -248,7 +248,7 @@ void runSquigleClass() {
   //  sq4.edgeCheck();
 }
 
-//void PD() {
-//  pd.sendFloat("");
-//}
+void PD() {
+  pd.sendFloat("");
+}
 

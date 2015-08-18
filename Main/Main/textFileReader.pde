@@ -12,15 +12,10 @@ class textFileReader {
   int retPitch;
   int retDuration;
 
-  int[] maxDurationArray = new int[2];
-  int[] minDurationArray = new int[2];
-  int[] maxPitchArray = new int [2];
-  int[] minPitchArray = new int [2];
-
   int maxPitch;
   int maxDuration;
-  int minPitch;
-  int minDuration;
+  int minPitch = 10000; //Large valuses to compare to
+  int minDuration = 10000;
 
   //Constructor
   textFileReader(String iFile) {
@@ -44,8 +39,8 @@ class textFileReader {
   //Measure time passed and send new values from the arrays
   void timer() {
     if (z < text.length - 1) {
-//      println("Length: ", text.length);
-//      println("Millis: "+millis()+" Next Millis: " + singerInfo[0][z+1] + " SecondPasses: " + secondPassed);
+      //      println("Length: ", text.length);
+      //      println("Millis: "+millis()+" Next Millis: " + singerInfo[0][z+1] + " SecondPasses: " + secondPassed);
       //Initialise counters
       //      millis = millis() - last;
 
@@ -77,55 +72,40 @@ class textFileReader {
   void rangeCalc() { //Calculates the maximum & minimum pitch and duration within the text file
     //Max Pitch
     for (int i=0; i<text.length; i++) {
-      maxPitchArray[1] = maxPitchArray[0];
-      maxPitchArray[0] = singerInfo[1][i];
-      if (maxPitchArray[0] > maxPitchArray[1]) {
-        maxPitch = maxPitchArray[0];
+      if (singerInfo[1][i] > maxPitch) {
+        maxPitch = singerInfo[1][i];
       }
-    }
-
-    //Min Pitch
-    for (int i=0; i<text.length; i++) {
-      minPitchArray[1] = minPitchArray[0];
-      minPitchArray[0] = singerInfo[1][i];
-      if (maxPitchArray[0] < maxPitchArray[1]) {
-        minPitch = minPitchArray[0];
+      //Min Pitch
+      if (singerInfo[1][i] < minPitch) {
+        minPitch = singerInfo[1][i];
       }
-    }
-
-    //Max Duration
-    for (int i=0; i<text.length; i++) {
-      maxDurationArray[1] = maxDurationArray[0];
-      maxDurationArray[0] = singerInfo[2][i];
-      if (maxDurationArray[0] > maxDurationArray[1]) {
-        maxDuration = maxDurationArray[0];
+      //Max Duration
+      if (singerInfo[2][i] > maxDuration) {
+        maxDuration = singerInfo[2][i];
       }
-    }
-
-    //Min Duration
-    for (int i=0; i<text.length; i++) {
-      minDurationArray[1] = minDurationArray[0];
-      minDurationArray[0] = singerInfo[2][i];
-      if (minDurationArray[0] < minDurationArray[1]) {
-        minDuration = minDurationArray[0];
+      //Min Duration
+      if (singerInfo[2][i] < minDuration)
+       {
+        minDuration = singerInfo[2][i];
       }
-    }
-  }
-
-  int getMinPitch(){
-   return minPitch; 
+    }  
+//    println("(File) maxPitch: "+ maxPitch + " maxDuration: "+maxDuration);
   }
   
-  int getMaxPitch(){
+  int getMinPitch() {
+    return minPitch;
+  }
+
+  int getMaxPitch() {
     return maxPitch;
   }
-  
-  int getMinDuration(){
-   return minDuration; 
+
+  int getMinDuration() {
+    return minDuration;
   }
-  
-  int getMaxDuration(){
-   return maxDuration; 
+
+  int getMaxDuration() {
+    return maxDuration;
   }
 
   //Returns the current value under 'Pitch' in the CSV file
@@ -140,7 +120,7 @@ class textFileReader {
   int getDuration() {
     if (NEXT == true) {
       retDuration = singerInfo[2][z];
-//      println("retDuration: "+retDuration+" minDuration: " + minDuration + " maxDuration: "+maxDuration);
+      //      println("retDuration: "+retDuration+" minDuration: " + minDuration + " maxDuration: "+maxDuration);
     }
     return retDuration;
   }
